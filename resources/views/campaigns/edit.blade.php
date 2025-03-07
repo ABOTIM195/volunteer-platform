@@ -59,20 +59,24 @@
                             <x-input-error :messages="$errors->get('location')" class="mt-2" />
                         </div>
 
-                        <div class="md:col-span-2">
-                            <x-input-label for="image" value="صورة الحملة (اختياري)" />
+                        <!-- قسم الصورة -->
+                        <div class="mb-4">
+                            <label for="image" class="block text-gray-700 dark:text-gray-300 mb-2">صورة الحملة</label>
+                            
                             @if($campaign->image)
-                                <div class="mb-3">
-                                    <img src="{{ asset('storage/' . $campaign->image) }}" alt="{{ $campaign->title }}" class="h-32 object-cover rounded">
-                                    <label class="inline-flex items-center mt-2">
-                                        <input type="checkbox" name="remove_image" value="1" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800">
+                                <div class="mb-2">
+                                    <img src="{{ asset('storage/' . $campaign->image) }}" alt="{{ $campaign->title }}" class="w-32 h-32 object-cover rounded-md">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" name="remove_image" class="rounded border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800">
                                         <span class="mr-2 text-sm text-gray-600 dark:text-gray-400">إزالة الصورة الحالية</span>
                                     </label>
                                 </div>
                             @endif
-                            <input id="image" name="image" type="file" accept="image/*" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" />
-                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">يفضل أن تكون الصورة بحجم 1200×600 بكسل أو بنسبة 2:1.</p>
-                            <x-input-error :messages="$errors->get('image')" class="mt-2" />
+                            
+                            <input type="file" name="image" id="image" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">اختياري. الصيغ المدعومة: JPG, PNG, GIF. الحد الأقصى: 2MB</p>
                         </div>
                     </div>
 
