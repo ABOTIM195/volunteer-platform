@@ -87,13 +87,14 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         @forelse($campaigns as $campaign)
                             <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md border border-gray-100 dark:border-gray-700 transition-transform hover:-translate-y-1">
-                                <div class="h-48 bg-gray-200 dark:bg-gray-700 relative">
+                                <div class="relative">
                                     @if($campaign->image)
-                                        <img src="{{ asset('storage/' . $campaign->image) }}" alt="{{ $campaign->title }}" class="w-full h-full object-cover">
+                                        <img src="{{ asset('storage/' . $campaign->image) }}" alt="{{ $campaign->title }}" class="w-full h-48 object-cover rounded-t-lg">
+                                    @else
+                                        <div class="w-full h-48 bg-gray-200 dark:bg-gray-700 rounded-t-lg flex items-center justify-center">
+                                            <span class="text-gray-500 dark:text-gray-400">لا توجد صورة</span>
+                                        </div>
                                     @endif
-                                    <div class="absolute top-3 right-3 {{ $campaign->type == 'volunteer' ? 'bg-blue-600' : 'bg-orange-600' }} text-white text-xs font-bold px-3 py-1 rounded-full">
-                                        {{ $campaign->type == 'volunteer' ? 'حملة تطوع' : 'حملة مساعدة' }}
-                                    </div>
                                 </div>
                                 <div class="p-6">
                                     <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">{{ $campaign->title }}</h3>
