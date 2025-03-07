@@ -32,28 +32,25 @@ class DonationController extends Controller
      */
     public function store(Request $request, Campaign $campaign)
     {
-        // Validate the request
         $validated = $request->validate([
             'amount' => 'required|numeric|min:1',
-            'payment_method' => 'required|string|in:credit_card,bank_transfer,paypal',
-            'message' => 'nullable|string',
+            'notes' => 'nullable|string|max:255',
         ]);
-
-        // Add user_id and campaign_id
-        $validated['user_id'] = Auth::id();
-        $validated['campaign_id'] = $campaign->id;
-        
-        // Add transaction_id (in a real-world application, this would come from the payment gateway)
-        $validated['transaction_id'] = 'TRX-' . time() . '-' . Auth::id();
-        
+    
         // Create the donation
-        $donation = Donation::create($validated);
-        
-        // Update campaign's current amount
-        $campaign->increment('current_amount', $validated['amount']);
-
+        $donation = new Donation();
+        $donation->user_id = auth()->id();
+        $donation->campaign_id = $campaign->id;
+        $donation->amount = $validated['amount'];
+        $donation->notes = $validated['notes'] ?? null;
+        $donation->save();
+    
+        // Update the campaign's current amount
+        $campaign->current_amount += $validated['amount'];
+        $campaign->save();
+    
         return redirect()->route('campaigns.show', $campaign)
-            ->with('success', 'تم إرسال تبرعك بنجاح! شكراً لدعمك.');
+            ->with('success', 'تم التبرع بنجاح! شكراً لمساهمتك.');
     }
 
     /**

@@ -4,48 +4,30 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Donation extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'user_id',
         'campaign_id',
         'amount',
-        'payment_method',
-        'transaction_id',
-        'status',
-        'message'
+        'notes',
     ];
 
     /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
+     * Get the user that made the donation.
      */
-    protected $casts = [
-        'amount' => 'decimal:2',
-    ];
-
-    /**
-     * Get the user that made the donation
-     */
-    public function user(): BelongsTo
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
     /**
-     * Get the campaign the donation was made to
+     * Get the campaign that received the donation.
      */
-    public function campaign(): BelongsTo
+    public function campaign()
     {
         return $this->belongsTo(Campaign::class);
     }

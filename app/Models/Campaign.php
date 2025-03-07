@@ -56,9 +56,9 @@ class Campaign extends Model
     }
 
     /**
-     * Get the donations for the campaign
+     * Get the donations for the campaign.
      */
-    public function donations(): HasMany
+    public function donations()
     {
         return $this->hasMany(Donation::class);
     }
