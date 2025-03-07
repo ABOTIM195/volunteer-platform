@@ -18,25 +18,25 @@ class ParticipationRequestController extends Controller
         $campaigns = Auth::user()->campaigns()->pluck('id');
         
         // Get all participation requests for these campaigns
-        $requests = ParticipationRequest::whereIn('campaign_id', $campaigns)
+        $participationRequests = ParticipationRequest::whereIn('campaign_id', $campaigns)
             ->with(['user', 'campaign'])
             ->latest()
             ->paginate(15);
         
-        return view('participation-requests.index', compact('requests'));
+        return view('participation-requests.index', compact('participationRequests'));
     }
 
     /**
-     * Display a listing of user's participation requests.
+     * Display a listing of the user's participation requests.
      */
     public function userRequests()
     {
         $requests = Auth::user()->participationRequests()
             ->with('campaign.creator')
             ->latest()
-            ->paginate(15);
+            ->paginate(10);
         
-        return view('participation-requests.user-requests', compact('requests'));
+        return view('participation-requests.user', compact('requests'));
     }
 
     /**
