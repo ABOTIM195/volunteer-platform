@@ -70,7 +70,13 @@
         <!-- القسم الرئيسي -->
         <div class="relative">
             <!-- قسم الترحيب -->
-            <div class="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-teal-600 via-teal-500 to-emerald-600 relative overflow-hidden">
+                        <!-- قسم الترحيب -->
+                        <div class="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-teal-600 via-teal-500 to-emerald-600 relative overflow-hidden">
+                <!-- صورة خلفية شفافة -->
+                <div class="absolute inset-0 z-0 opacity-15">
+                    <img src="{{ asset('images/volunteer-pattern.png') }}" alt="نمط خلفية" class="w-full h-full object-cover">
+                </div>
+                
                 <!-- أشكال زخرفية -->
                 <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10">
                     <div class="absolute -top-[10%] -left-[5%] w-[40%] h-[40%] rounded-full bg-white"></div>
@@ -81,7 +87,16 @@
                 <div class="max-w-7xl mx-auto relative z-10">
                     <div class="flex flex-col md:flex-row items-center">
                         <div class="md:w-1/2 mb-10 md:mb-0" data-aos="fade-right" data-aos-duration="1000">
-                            <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight text-white">منصة التطوع <span class="text-teal-100">الأولى</span> في المملكة</h1>
+                            <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight text-white">
+                                منصة التطوع 
+                                <span class="text-teal-100 relative">
+                                    الرائدة
+                                    <svg class="absolute -bottom-2 left-0 w-full" height="6" viewBox="0 0 200 6" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0 3C50 1 150 5 200 3" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" />
+                                    </svg>
+                                </span> 
+                                في الجمهورية
+                            </h1>
                             <p class="text-xl mb-8 text-teal-100">انضم إلينا اليوم وكن جزءاً من التغيير الإيجابي في المجتمع</p>
                             <div class="flex flex-wrap gap-4">
                                 <a href="{{ route('register') }}" class="bg-white text-teal-600 hover:bg-teal-50 px-6 py-3 rounded-lg font-medium text-lg transition duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
@@ -92,18 +107,13 @@
                                         </svg>
                                     </span>
                                 </a>
-                                <a href="#campaigns" class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-teal-600 px-6 py-3 rounded-lg font-medium text-lg transition duration-300 transform hover:-translate-y-1">استكشف الحملات</a>
+                                <a href="#campaigns" class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-teal-600 px-6 py-3 rounded-lg font-medium text-lg transition duration-300 transform hover:-translate-y-1">استكشف الفرص</a>
                             </div>
                         </div>
                         <div class="md:w-1/2 flex justify-center" data-aos="fade-left" data-aos-duration="1000">
                             <div class="relative">
                                 <div class="absolute inset-0 bg-gradient-to-br from-teal-300/20 to-emerald-300/20 rounded-full blur-3xl"></div>
-                                <div class="md:w-1/2 flex justify-center" data-aos="fade-left" data-aos-duration="1000">
-                                    <div class="relative">
-                                        <div class="absolute inset-0 bg-gradient-to-br from-teal-300/20 to-emerald-300/20 rounded-full blur-3xl"></div>
-                                        <img src="{{ asset('images/gallery/volunteer1.jpg') }}" alt="التطوع" class="w-full max-w-md rounded-lg shadow-xl relative z-10 object-cover">
-                                    </div>
-                                </div>
+                                <img src="{{ asset('images/volunteer-hero.jpg') }}" alt="" class="w-full max-w-md rounded-lg shadow-xl relative z-10 object-cover">
                             </div>
                         </div>
                     </div>
@@ -122,15 +132,13 @@
                                 </svg>
                             </div>
                             <div class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-emerald-600 mb-2">{{ \App\Models\Campaign::count() }}+</div>
-                            <div class="text-gray-700 dark:text-gray-300 font-medium text-lg">حملة تطوعية</div>
+                            <div class="text-gray-700 dark:text-gray-300 font-medium text-lg">فرصة تطوعية</div>
                         </div>
                         <div class="bg-gradient-to-br from-white to-teal-50 dark:from-gray-800 dark:to-teal-900/30 p-8 rounded-2xl text-center transform transition duration-500 hover:scale-105 shadow-xl hover:shadow-2xl border border-teal-100/50 dark:border-teal-900/50" data-aos="zoom-in" data-aos-delay="200">
                             <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-900/50 mb-6">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-emerald-600 dark:text-emerald-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                                </svg>
-                            </div>
-                            <div class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-emerald-600 mb-2">{{ \App\Models\User::count() }}+</div>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 
+                                                                <div class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-emerald-600 mb-2">{{ \App\Models\User::count() }}+</div>
                             <div class="text-gray-700 dark:text-gray-300 font-medium text-lg">متطوع مسجل</div>
                         </div>
                         <div class="bg-gradient-to-br from-white to-teal-50 dark:from-gray-800 dark:to-teal-900/30 p-8 rounded-2xl text-center transform transition duration-500 hover:scale-105 shadow-xl hover:shadow-2xl border border-teal-100/50 dark:border-teal-900/50" data-aos="zoom-in" data-aos-delay="300">
@@ -140,18 +148,18 @@
                                 </svg>
                             </div>
                             <div class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-emerald-600 mb-2">{{ \App\Models\ParticipationRequest::where('status', 'approved')->count() }}+</div>
-                            <div class="text-gray-700 dark:text-gray-300 font-medium text-lg">مشاركة تطوعية</div>
+                            <div class="text-gray-700 dark:text-gray-300 font-medium text-lg">ساعة تطوعية</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- قسم الحملات التطوعية -->
+            <!-- قسم الفرص التطوعية -->
             <div id="campaigns" class="py-16 bg-gray-50 dark:bg-gray-900">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-12" data-aos="fade-up">
-                        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">أحدث الحملات التطوعية</h2>
-                        <p class="text-xl text-gray-600 dark:text-gray-400">انضم إلى إحدى هذه الحملات وكن جزءاً من التغيير</p>
+                        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">أحدث الفرص التطوعية</h2>
+                        <p class="text-xl text-gray-600 dark:text-gray-400">انضم إلى إحدى هذه الفرص وكن جزءاً من التغيير</p>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -206,7 +214,7 @@
                     </div>
 
                     <div class="text-center mt-10" data-aos="fade-up">
-                        <a href="{{ route('campaigns.index') }}" class="inline-block bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1">عرض جميع الحملات</a>
+                        <a href="{{ route('campaigns.index') }}" class="inline-block bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1">عرض جميع الفرص</a>
                     </div>
                 </div>
             </div>
@@ -227,25 +235,7 @@
                                 </svg>
                             </div>
                             <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">موثوقية وأمان</h3>
-                            <p class="text-gray-600 dark:text-gray-400">نتحقق من جميع الحملات التطوعية للتأكد من مصداقيتها وأمانها للمتطوعين</p>
-                        </div>
-                        <div class="bg-gray-50 dark:bg-gray-700 p-8 rounded-xl text-center" data-aos="fade-up" data-aos-delay="200">
-                            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-900 mb-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-emerald-600 dark:text-emerald-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">شهادات معتمدة</h3>
-                            <p class="text-gray-600 dark:text-gray-400">احصل على شهادات تطوع معتمدة يمكنك استخدامها في سيرتك الذاتية ومسيرتك المهنية</p>
-                        </div>
-                        <div class="bg-gray-50 dark:bg-gray-700 p-8 rounded-xl text-center" data-aos="fade-up" data-aos-delay="300">
-                            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-teal-100 dark:bg-teal-900 mb-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-teal-600 dark:text-teal-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">موثوقية وأمان</h3>
-                            <p class="text-gray-600 dark:text-gray-400">نتحقق من جميع الحملات التطوعية للتأكد من مصداقيتها وأمانها للمتطوعين</p>
+                            <p class="text-gray-600 dark:text-gray-400">نتحقق من جميع الفرص التطوعية للتأكد من مصداقيتها وأمانها للمتطوعين</p>
                         </div>
                         <div class="bg-gray-50 dark:bg-gray-700 p-8 rounded-xl text-center" data-aos="fade-up" data-aos-delay="200">
                             <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-900 mb-6">
@@ -263,109 +253,51 @@
                                 </svg>
                             </div>
                             <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">تجربة سلسة</h3>
-                            <p class="text-gray-600 dark:text-gray-400">واجهة سهلة الاستخدام تمكنك من التسجيل في الحملات التطوعية بنقرات بسيطة</p>
+                            <p class="text-gray-600 dark:text-gray-400">واجهة سهلة الاستخدام تمكنك من التسجيل في الفرص التطوعية بنقرات بسيطة</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- قسم الشهادات -->
+            <!-- قسم المتطوعين المميزين -->
             <div class="py-16 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center mb-12" data-aos="fade-up">
-                        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">ماذا يقول المتطوعون عنا</h2>
-                        <p class="text-xl text-gray-600 dark:text-gray-400">آراء المتطوعين الذين شاركوا في حملاتنا</p>
+                <div class="text-center mb-12" data-aos="fade-up">
+                        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">متطوعونا المميزون</h2>
+                        <p class="text-xl text-gray-600 dark:text-gray-400">قصص نجاح من متطوعينا</p>
                     </div>
 
                     <div class="swiper testimonialSwiper" data-aos="fade-up">
                         <div class="swiper-wrapper pb-8">
+                            @foreach(\App\Models\User::whereHas('participations', function($query) {
+                                $query->where('status', 'approved');
+                            })->inRandomOrder()->take(3)->get() as $volunteer)
                             <div class="swiper-slide">
                                 <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
                                     <div class="flex items-center mb-4">
-                                        <div class="h-12 w-12 rounded-full bg-teal-100 dark:bg-teal-900 flex items-center justify-center text-xl font-bold text-teal-600 dark:text-teal-300 mr-4">أ</div>
+                                        <div class="h-12 w-12 rounded-full bg-teal-100 dark:bg-teal-900 flex items-center justify-center text-xl font-bold text-teal-600 dark:text-teal-300 mr-4">
+                                            {{ substr($volunteer->name, 0, 1) }}
+                                        </div>
                                         <div>
-                                            <h4 class="text-lg font-medium text-gray-900 dark:text-white">أحمد محمد</h4>
-                                            <p class="text-gray-500 dark:text-gray-400">متطوع في حملة تنظيف الشواطئ</p>
+                                            <h4 class="text-lg font-medium text-gray-900 dark:text-white">{{ $volunteer->name }}</h4>
+                                            <p class="text-gray-500 dark:text-gray-400">
+                                                {{ $volunteer->participations()->where('status', 'approved')->count() }} مشاركة تطوعية
+                                            </p>
                                         </div>
                                     </div>
-                                    <p class="text-gray-600 dark:text-gray-400">"تجربة رائعة ومنظمة بشكل احترافي. سعدت بالمشاركة في هذه الحملة وسأشارك في المزيد من الحملات المستقبلية."</p>
+                                    <p class="text-gray-600 dark:text-gray-400">
+                                        "أتاحت لي المنصة فرصة المساهمة في خدمة المجتمع والمشاركة في العديد من الفرص التطوعية المتنوعة."
+                                    </p>
                                     <div class="mt-4 flex text-teal-500">
+                                        @for($i = 0; $i < 5; $i++)
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                         </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
+                                        @endfor
                                     </div>
                                 </div>
                             </div>
-                            <div class="swiper-slide">
-                                <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
-                                    <div class="flex items-center mb-4">
-                                        <div class="h-12 w-12 rounded-full bg-emerald-100 dark:bg-emerald-900 flex items-center justify-center text-xl font-bold text-emerald-600 dark:text-emerald-300 mr-4">س</div>
-                                        <div>
-                                            <h4 class="text-lg font-medium text-gray-900 dark:text-white">سارة عبدالله</h4>
-                                            <p class="text-gray-500 dark:text-gray-400">متطوعة في حملة توزيع الطعام</p>
-                                        </div>
-                                    </div>
-                                    <p class="text-gray-600 dark:text-gray-400">"شعرت بسعادة كبيرة عندما رأيت الابتسامة على وجوه المحتاجين. المنصة سهلت علي عملية التسجيل والمشاركة في الحملة."</p>
-                                    <div class="mt-4 flex text-teal-500">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
-                                    <div class="flex items-center mb-4">
-                                        <div class="h-12 w-12 rounded-full bg-teal-100 dark:bg-teal-900 flex items-center justify-center text-xl font-bold text-teal-600 dark:text-teal-300 mr-4">م</div>
-                                        <div>
-                                            <h4 class="text-lg font-medium text-gray-900 dark:text-white">محمد خالد</h4>
-                                            <p class="text-gray-500 dark:text-gray-400">متطوع في حملة زراعة الأشجار</p>
-                                        </div>
-                                    </div>
-                                    <p class="text-gray-600 dark:text-gray-400">"منصة رائعة تتيح لي فرصة المساهمة في تحسين البيئة. أنصح الجميع بالتسجيل والمشاركة في الحملات التطوعية."</p>
-                                    <div class="mt-4 flex text-teal-500">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                         <div class="swiper-pagination"></div>
                     </div>
@@ -381,36 +313,23 @@
                     </div>
 
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
-                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-xl flex items-center justify-center h-24 transition duration-300 transform hover:scale-105 hover:shadow-md" data-aos="zoom-in" data-aos-delay="100">
+                        @foreach(['وزارة الموارد البشرية', 'جمعية تكاتف', 'مؤسسة الأمير محمد بن سلمان', 'الهلال الأحمر السعودي'] as $partner)
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-xl flex items-center justify-center h-24 transition duration-300 transform hover:scale-105 hover:shadow-md" data-aos="zoom-in" data-aos-delay="{{ $loop->index * 100 + 100 }}">
                             <div class="text-center">
-                                <div class="text-2xl font-bold text-teal-600 dark:text-teal-400">شركة الأمل</div>
+                                <div class="text-lg md:text-xl font-bold text-teal-600 dark:text-teal-400">{{ $partner }}</div>
                             </div>
                         </div>
-                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-xl flex items-center justify-center h-24 transition duration-300 transform hover:scale-105 hover:shadow-md" data-aos="zoom-in" data-aos-delay="200">
-                            <div class="text-center">
-                                <div class="text-2xl font-bold text-emerald-600 dark:text-emerald-400">مؤسسة التنمية</div>
-                            </div>
-                        </div>
-                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-xl flex items-center justify-center h-24 transition duration-300 transform hover:scale-105 hover:shadow-md" data-aos="zoom-in" data-aos-delay="300">
-                            <div class="text-center">
-                                <div class="text-2xl font-bold text-teal-600 dark:text-teal-400">جمعية العطاء</div>
-                            </div>
-                        </div>
-                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-xl flex items-center justify-center h-24 transition duration-300 transform hover:scale-105 hover:shadow-md" data-aos="zoom-in" data-aos-delay="400">
-                            <div class="text-center">
-                                <div class="text-2xl font-bold text-emerald-600 dark:text-emerald-400">مركز المستقبل</div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
 
                     <div class="text-center mt-10" data-aos="fade-up">
-                        <a href="#" class="inline-block bg-gradient-to-r from-teal-100 to-emerald-100 hover:from-teal-200 hover:to-emerald-200 text-teal-700 dark:bg-gradient-to-r dark:from-teal-900 dark:to-emerald-900 dark:hover:from-teal-800 dark:hover:to-emerald-800 dark:text-teal-300 px-6 py-3 rounded-lg font-medium transition duration-300 shadow-md hover:shadow-lg">كن شريكاً معنا</a>
+                        <a href="#contact" class="inline-block bg-gradient-to-r from-teal-100 to-emerald-100 hover:from-teal-200 hover:to-emerald-200 text-teal-700 dark:bg-gradient-to-r dark:from-teal-900 dark:to-emerald-900 dark:hover:from-teal-800 dark:hover:to-emerald-800 dark:text-teal-300 px-6 py-3 rounded-lg font-medium transition duration-300 shadow-md hover:shadow-lg">كن شريكاً معنا</a>
                     </div>
                 </div>
             </div>
 
             <!-- قسم التواصل -->
-            <div class="py-16 bg-gray-50 dark:bg-gray-900">
+            <div id="contact" class="py-16 bg-gray-50 dark:bg-gray-900">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-12" data-aos="fade-up">
                         <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">تواصل معنا</h2>
@@ -420,18 +339,19 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg" data-aos="fade-right">
                             <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">أرسل رسالة</h3>
-                            <form>
+                            <form action="{{ route('contact.store') }}" method="POST">
+                                @csrf
                                 <div class="mb-4">
                                     <label for="name" class="block text-gray-700 dark:text-gray-300 mb-2">الاسم</label>
-                                    <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:text-white">
+                                    <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:text-white" required>
                                 </div>
                                 <div class="mb-4">
                                     <label for="email" class="block text-gray-700 dark:text-gray-300 mb-2">البريد الإلكتروني</label>
-                                    <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:text-white">
+                                    <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:text-white" required>
                                 </div>
                                 <div class="mb-4">
                                     <label for="message" class="block text-gray-700 dark:text-gray-300 mb-2">الرسالة</label>
-                                    <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:text-white"></textarea>
+                                    <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 dark:bg-gray-700 dark:text-white" required></textarea>
                                 </div>
                                 <button type="submit" class="w-full bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1">إرسال الرسالة</button>
                             </form>
@@ -447,7 +367,7 @@
                                     </div>
                                     <div class="mr-4">
                                         <p class="text-gray-700 dark:text-gray-300 font-medium">البريد الإلكتروني</p>
-                                        <p class="text-gray-600 dark:text-gray-400">info@volunteer-platform.com</p>
+                                        <p class="text-gray-600 dark:text-gray-400">ahmaddarwesh1426@gmail.com</p>
                                     </div>
                                 </div>
                                 <div class="flex items-start">
@@ -458,7 +378,7 @@
                                     </div>
                                     <div class="mr-4">
                                         <p class="text-gray-700 dark:text-gray-300 font-medium">رقم الهاتف</p>
-                                        <p class="text-gray-600 dark:text-gray-400">+966 12 345 6789</p>
+                                        <p class="text-gray-600 dark:text-gray-400">+963 959 629 794</p>
                                     </div>
                                 </div>
                                 <div class="flex items-start">
@@ -470,26 +390,31 @@
                                     </div>
                                     <div class="mr-4">
                                         <p class="text-gray-700 dark:text-gray-300 font-medium">العنوان</p>
-                                        <p class="text-gray-600 dark:text-gray-400">الرياض، المملكة العربية السعودية</p>
+                                        <p class="text-gray-600 dark:text-gray-400">دمشق، الجمهورية العربية السورية</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="mt-8">
                                 <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-4">تابعنا على</h4>
                                 <div class="flex space-x-4 space-x-reverse">
-                                    <a href="#" class="bg-gray-100 dark:bg-gray-700 p-2 rounded-full text-teal-600 dark:text-teal-400 hover:bg-teal-100 dark:hover:bg-teal-900 transition duration-300">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+                                    <a href="https://twitter.com/volunteer_sa" target="_blank" class="bg-gray-100 dark:bg-gray-700 p-2 rounded-full text-teal-600 dark:text-teal-400 hover:bg-teal-100 dark:hover:bg-teal-900 transition duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
                                         </svg>
                                     </a>
-                                    <a href="#" class="bg-gray-100 dark:bg-gray-700 p-2 rounded-full text-teal-600 dark:text-teal-400 hover:bg-teal-100 dark:hover:bg-teal-900 transition duration-300">
+                                    <a href="https://www.facebook.com/volunteer_sa" target="_blank" class="bg-gray-100 dark:bg-gray-700 p-2 rounded-full text-teal-600 dark:text-teal-400 hover:bg-teal-100 dark:hover:bg-teal-900 transition duration-300">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                                            <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
                                         </svg>
                                     </a>
-                                    <a href="#" class="bg-gray-100 dark:bg-gray-700 p-2 rounded-full text-teal-600 dark:text-teal-400 hover:bg-teal-100 dark:hover:bg-teal-900 transition duration-300">
+                                    <a href="https://www.instagram.com/volunteer_sa" target="_blank" class="bg-gray-100 dark:bg-gray-700 p-2 rounded-full text-teal-600 dark:text-teal-400 hover:bg-teal-100 dark:hover:bg-teal-900 transition duration-300">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
+                                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                                        </svg>
+                                    </a>
+                                    <a href="https://www.linkedin.com/company/volunteer_sa" target="_blank" class="bg-gray-100 dark:bg-gray-700 p-2 rounded-full text-teal-600 dark:text-teal-400 hover:bg-teal-100 dark:hover:bg-teal-900 transition duration-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/>
                                         </svg>
                                     </a>
                                 </div>
@@ -498,192 +423,177 @@
                     </div>
                 </div>
             </div>
+
+            <!-- قسم الاشتراك في النشرة البريدية -->
+            <div class="py-16 bg-gradient-to-r from-teal-500 to-emerald-600 text-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div data-aos="fade-right">
+                            <h2 class="text-3xl font-bold mb-4">اشترك في نشرتنا البريدية</h2>
+                            <p class="text-xl opacity-90 mb-6">احصل على آخر الفرص التطوعية والأخبار مباشرة إلى بريدك الإلكتروني</p>
+                        </div>
+                        <div data-aos="fade-left">
+                            <form action="{{ route('newsletter.subscribe') }}" method="POST" class="flex flex-col md:flex-row gap-4">
+                                @csrf
+                                <input type="email" name="email" placeholder="أدخل بريدك الإلكتروني" class="flex-1 px-4 py-3 rounded-lg text-gray-800 focus:ring-2 focus:ring-white" required>
+                                <button type="submit" class="px-6 py-3 bg-white text-teal-600 font-medium rounded-lg hover:bg-gray-100 transition duration-300 shadow-md hover:shadow-lg">اشتراك</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="bg-gray-900 text-white py-12">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">منصة التطوع</h3>
+                            <p class="text-gray-400 mb-4">منصة تربط المتطوعين بالفرص التطوعية في جميع أنحاء الجمهورية العربية السورية.</p>
+                            <div class="flex space-x-4 space-x-reverse">
+                                <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                                    </svg>
+                                </a>
+                                <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                                    </svg>
+                                </a>
+                                <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">روابط سريعة</h3>
+                            <ul class="space-y-2">
+                                <li><a href="{{ route('campaigns.index') }}" class="text-gray-400 hover:text-white transition duration-300">الفرص التطوعية</a></li>
+                                <li><a href="{{ route('about') }}" class="text-gray-400 hover:text-white transition duration-300">من نحن</a></li>
+                                <li><a href="{{ route('faq') }}" class="text-gray-400 hover:text-white transition duration-300">الأسئلة الشائعة</a></li>
+                                <li><a href="{{ route('contact') }}" class="text-gray-400 hover:text-white transition duration-300">اتصل بنا</a></li>
+                                <li><a href="{{ route('privacy') }}" class="text-gray-400 hover:text-white transition duration-300">سياسة الخصوصية</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">المجالات التطوعية</h3>
+                            <ul class="space-y-2">
+                                @foreach(\App\Models\Category::take(5)->get() as $category)
+                                <li><a href="{{ route('campaigns.index', ['category' => $category->id]) }}" class="text-gray-400 hover:text-white transition duration-300">{{ $category->name }}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-4">اتصل بنا</h3>
+                            <ul class="space-y-2 text-gray-400">
+                                <li class="flex items-start">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                    <span>دمشق، الجمهورية العربية السورية</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    </svg>
+                                    <span>ahmaddarwesh1426@gmail.com</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                    </svg>
+                                    <span>+963 959 629 794</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                        <p>&copy; {{ date('Y') }} منصة التطوع. جميع الحقوق محفوظة.</p>
+                    </div>
+                </div>
+            </footer>
         </div>
 
-    </div>
-    </div>
-    </div>
-    </div>
+        <!-- Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+        <script>
+            // تهيئة مكتبة AOS للتأثيرات الحركية
+            AOS.init({
+                duration: 800,
+                once: true,
+            });
 
-    <!-- قسم معرض الصور -->
-    <div class="py-16 bg-gray-50 dark:bg-gray-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12" data-aos="fade-up">
-                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">لحظات من حملاتنا</h2>
-                <p class="text-xl text-gray-600 dark:text-gray-400">صور من الحملات التطوعية السابقة</p>
-            </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                <div class="relative overflow-hidden rounded-lg shadow-lg group" data-aos="zoom-in" data-aos-delay="100">
-                    <img src="{{ asset('images/gallery/volunteer1.jpg') }}" alt="متطوعون" class="w-full h-64 object-cover transition duration-500 transform group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end">
-                        <div class="p-4 text-white">
-                            <h3 class="font-bold">حملة تنظيف الشواطئ</h3>
-                            <p class="text-sm">يونيو 2023</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="relative overflow-hidden rounded-lg shadow-lg group" data-aos="zoom-in" data-aos-delay="200">
-                    <img src="{{ asset('images/gallery/volunteer2.jpg') }}" alt="متطوعون" class="w-full h-64 object-cover transition duration-500 transform group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end">
-                        <div class="p-4 text-white">
-                            <h3 class="font-bold">حملة التشجير</h3>
-                            <p class="text-sm">مارس 2023</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="relative overflow-hidden rounded-lg shadow-lg group" data-aos="zoom-in" data-aos-delay="300">
-                    <img src="{{ asset('images/gallery/volunteer3.jpg') }}" alt="متطوعون" class="w-full h-64 object-cover transition duration-500 transform group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end">
-                        <div class="p-4 text-white">
-                            <h3 class="font-bold">حملة التبرع بالدم</h3>
-                            <p class="text-sm">أبريل 2023</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="relative overflow-hidden rounded-lg shadow-lg group" data-aos="zoom-in" data-aos-delay="400">
-                    <img src="{{ asset('images/gallery/volunteer4.jpg') }}" alt="متطوعون" class="w-full h-64 object-cover transition duration-500 transform group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end">
-                        <div class="p-4 text-white">
-                            <h3 class="font-bold">حملة تعليم الأطفال</h3>
-                            <p class="text-sm">مايو 2023</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center mt-10" data-aos="fade-up">
-                <a href="{{ route('campaigns.index') }}" class="inline-block bg-gradient-to-r from-teal-500 to-emerald-600 hover:from-teal-600 hover:to-emerald-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1">عرض المزيد من الصور</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- قسم الشركاء -->
-    <div class="py-16 bg-white dark:bg-gray-800">
-
-        <!-- Footer -->
-        <footer class="bg-gray-900 text-white py-12">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                    <div>
-                        <h3 class="text-xl font-bold mb-4">منصة التطوع</h3>
-                        <p class="text-gray-400 mb-4">منصة تربط المتطوعين بالفرص التطوعية في جميع أنحاء المملكة</p>
-                        <div class="flex space-x-4 space-x-reverse">
-                            <a href="#" class="text-gray-400 hover:text-teal-500 transition duration-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
-                                </svg>
-                            </a>
-                            <a href="#" class="text-gray-400 hover:text-teal-500 transition duration-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                                </svg>
-                            </a>
-                            <a href="#" class="text-gray-400 hover:text-teal-500 transition duration-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold mb-4">روابط سريعة</h3>
-                        <ul class="space-y-2">
-                            <li><a href="{{ route('home') }}" class="text-gray-400 hover:text-teal-500 transition duration-300">الرئيسية</a></li>
-                            <li><a href="{{ route('campaigns.index') }}" class="text-gray-400 hover:text-teal-500 transition duration-300">الحملات التطوعية</a></li>
-                            <li><a href="{{ url('/about') }}" class="text-gray-400 hover:text-teal-500 transition duration-300">من نحن</a></li>
-                            <li><a href="{{ url('/contact') }}" class="text-gray-400 hover:text-teal-500 transition duration-300">اتصل بنا</a></li>
-                            <li><a href="{{ url('/faq') }}" class="text-gray-400 hover:text-teal-500 transition duration-300">الأسئلة الشائعة</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold mb-4">الفئات</h3>
-                        <ul class="space-y-2">
-                            @foreach(\App\Models\Category::take(5)->get() as $category)
-                            <li><a href="{{ route('campaigns.index', ['category' => $category->id]) }}" class="text-gray-400 hover:text-teal-500 transition duration-300">{{ $category->name }}</a></li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold mb-4">النشرة البريدية</h3>
-                        <p class="text-gray-400 mb-4">اشترك في نشرتنا البريدية للحصول على آخر الأخبار والحملات التطوعية</p>
-                        <form class="flex">
-                            <input type="email" placeholder="البريد الإلكتروني" class="px-4 py-2 w-full rounded-r-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
-                            <button type="submit" class="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-l-lg transition duration-300">اشتراك</button>
-                        </form>
-                    </div>
-                </div>
-                <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-                    <div class="text-gray-400 mb-4 md:mb-0">
-                        &copy; {{ date('Y') }} منصة التطوع. جميع الحقوق محفوظة.
-                    </div>
-                    <div class="flex space-x-4 space-x-reverse">
-                        <a href="{{ url('/privacy') }}" class="text-gray-400 hover:text-teal-500 transition duration-300">سياسة الخصوصية</a>
-                        <a href="{{ url('/terms') }}" class="text-gray-400 hover:text-teal-500 transition duration-300">شروط الاستخدام</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
-
-    <!-- سكريبت Swiper -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <!-- سكريبت AOS -->
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-
-    <script>
-        // تهيئة AOS
-        AOS.init({
-            duration: 800,
-            once: true,
-        });
-
-        // تهيئة Swiper للشهادات
-        var testimonialSwiper = new Swiper('.testimonialSwiper', {
-            slidesPerView: 1,
-            spaceBetween: 30,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            breakpoints: {
-                640: {
-                    slidesPerView: 1,
+            // تهيئة Swiper للشرائح
+            new Swiper('.heroSwiper', {
+                effect: 'fade',
+                autoplay: {
+                    delay: 5000,
                 },
-                768: {
-                    slidesPerView: 2,
+                loop: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
                 },
-                1024: {
-                    slidesPerView: 3,
+            });
+
+            new Swiper('.testimonialSwiper', {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                autoplay: {
+                    delay: 3000,
                 },
-            },
-            autoplay: {
-                delay: 5000,
-            },
-        });
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                breakpoints: {
+                    640: {
+                        slidesPerView: 1,
+                    },
+                    768: {
+                        slidesPerView: 2,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                    },
+                },
+            });
 
-        // تبديل الوضع المظلم
-        const darkModeToggle = document.getElementById('dark-mode-toggle');
-        const html = document.documentElement;
+            // التبديل بين الوضع الفاتح والداكن
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const htmlElement = document.documentElement;
 
-        // التحقق من الوضع المحفوظ
-        if (localStorage.getItem('darkMode') === 'true' ||
-            (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            html.classList.add('dark');
-            darkModeToggle.checked = true;
-        }
-
-        // تغيير الوضع عند النقر على الزر
-        darkModeToggle.addEventListener('change', function() {
-            if (this.checked) {
-                html.classList.add('dark');
-                localStorage.setItem('darkMode', 'true');
+            // التحقق من الوضع المحفوظ
+            if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                htmlElement.classList.add('dark');
             } else {
-                html.classList.remove('dark');
-                localStorage.setItem('darkMode', 'false');
+                htmlElement.classList.remove('dark');
             }
-        });
-    </script>
-</body>
 
+            themeToggleBtn.addEventListener('click', function() {
+                // تبديل الكلاس
+                htmlElement.classList.toggle('dark');
+
+                // تحديث التفضيل في localStorage
+                if (htmlElement.classList.contains('dark')) {
+                    localStorage.setItem('color-theme', 'dark');
+                } else {
+                    localStorage.setItem('color-theme', 'light');
+                }
+            });
+
+            // التحكم في القائمة المتنقلة
+            const mobileMenuBtn = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+        </script>
+    </body>
 </html>

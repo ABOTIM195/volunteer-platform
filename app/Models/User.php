@@ -48,14 +48,19 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
 
+    /**
+     * علاقة المستخدم بطلبات المشاركة في الفرص التطوعية
+     */
+    public function participations()
+    {
+        return $this->hasMany(ParticipationRequest::class, 'user_id');
+    }
+    
     /**
      * Check if user is a regular user
      *

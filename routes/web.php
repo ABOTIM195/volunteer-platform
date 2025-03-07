@@ -22,6 +22,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
 // Public campaign routes
 Route::resource('campaigns', CampaignController::class)->only(['index', 'show']);
 
@@ -64,10 +65,26 @@ Route::middleware('auth')->group(function () {
     
 });
 
-Route::get('/about', [App\Http\Controllers\PageController::class, 'about'])->name('about');
-Route::get('/contact', [App\Http\Controllers\PageController::class, 'contact'])->name('contact');
-Route::get('/faq', [App\Http\Controllers\PageController::class, 'faq'])->name('faq');
-Route::get('/privacy', [App\Http\Controllers\PageController::class, 'privacy'])->name('privacy');
+// طرق صفحات الموقع العامة
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
+Route::get('/faq', function () {
+    return view('faq');
+})->name('faq');
+
+Route::get('/privacy', function () {
+    return view('privacy');
+})->name('privacy');
+
+// طرق صفحة الاتصال
+Route::get('/contact', [App\Http\Controllers\ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [App\Http\Controllers\ContactController::class, 'store'])->name('contact.store');
+
+// طريق الاشتراك في النشرة البريدية
+Route::post('/newsletter/subscribe', [App\Http\Controllers\NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
+
 Route::get('/terms', [App\Http\Controllers\PageController::class, 'terms'])->name('terms');
 
 require __DIR__ . '/auth.php';
