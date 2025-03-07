@@ -30,8 +30,7 @@ class User extends Authenticatable
         'email',
         'password',
         'type',
-        'description',
-        'profile_image',
+        'avatar', // إضافة حقل الصورة الشخصية
     ];
 
     /**
