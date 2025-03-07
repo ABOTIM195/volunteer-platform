@@ -43,7 +43,7 @@ class ProfileController extends Controller
             // تخزين الصورة الجديدة
             $avatarPath = $request->file('avatar')->store('avatars', 'public');
             $request->user()->avatar = $avatarPath;
-        } elseif ($request->has('remove_avatar') && $request->remove_avatar) {
+        } elseif ($request->boolean('remove_avatar')) {
             // إزالة الصورة الحالية إذا طلب المستخدم ذلك
             if ($request->user()->avatar) {
                 Storage::disk('public')->delete($request->user()->avatar);
