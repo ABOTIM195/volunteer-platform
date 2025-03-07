@@ -29,11 +29,14 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        \Log::info('بيانات التسجيل المستلمة:', $request->all());
+        
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'type' => ['required', 'in:regular,team,organization'],
+            // جعل الحقول التالية اختيارية
+            'type' => ['nullable', 'in:regular,team,organization'],
             'description' => ['nullable', 'string'],
         ]);
 
@@ -41,8 +44,8 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'type' => $request->type,
-            'description' => $request->description,
+            'type' => $request->type ?? 'regular', // تعيين قيمة افتراضية إذا لم يتم توفير القيمة
+            'description' => $request->description ?? null,
         ]);
 
         event(new Registered($user));

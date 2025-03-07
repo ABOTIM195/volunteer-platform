@@ -137,8 +137,10 @@
                         <div class="bg-gradient-to-br from-white to-teal-50 dark:from-gray-800 dark:to-teal-900/30 p-8 rounded-2xl text-center transform transition duration-500 hover:scale-105 shadow-xl hover:shadow-2xl border border-teal-100/50 dark:border-teal-900/50" data-aos="zoom-in" data-aos-delay="200">
                             <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-900/50 mb-6">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-emerald-600 dark:text-emerald-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 
-                                                                <div class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-emerald-600 mb-2">{{ \App\Models\User::count() }}+</div>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                            </div>
+                            <div class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-emerald-600 mb-2">{{ \App\Models\User::count() }}+</div>
                             <div class="text-gray-700 dark:text-gray-300 font-medium text-lg">متطوع مسجل</div>
                         </div>
                         <div class="bg-gradient-to-br from-white to-teal-50 dark:from-gray-800 dark:to-teal-900/30 p-8 rounded-2xl text-center transform transition duration-500 hover:scale-105 shadow-xl hover:shadow-2xl border border-teal-100/50 dark:border-teal-900/50" data-aos="zoom-in" data-aos-delay="300">
