@@ -25,7 +25,7 @@ class CampaignController extends Controller
         
         $campaigns = $query->latest()->paginate(12);
         
-        return view('campaigns.index', compact('campaigns'));
+        return view('welcome', compact('campaigns'));
     }
 
     /**

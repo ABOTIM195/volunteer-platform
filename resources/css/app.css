@@ -1,3 +1,42 @@
+@import 'colors.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* تخصيص الألوان في Tailwind */
+@layer base {
+    :root {
+        --color-primary: 99 102 241; /* indigo-500 */
+        --color-secondary: 217 70 239; /* purple-500 */
+    }
+}
+
+@layer components {
+    .card {
+        @apply bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300;
+    }
+    
+    .btn {
+        @apply px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out;
+    }
+    
+    .btn-primary {
+        @apply bg-indigo-600 hover:bg-indigo-700 text-white;
+    }
+    
+    .btn-secondary {
+        @apply bg-purple-600 hover:bg-purple-700 text-white;
+    }
+    
+    .btn-outline {
+        @apply bg-transparent border-2 border-current;
+    }
+    
+    .section-title {
+        @apply text-3xl font-bold text-gray-900 dark:text-white mb-4;
+    }
+    
+    .section-subtitle {
+        @apply text-xl text-gray-600 dark:text-gray-400;
+    }
+}

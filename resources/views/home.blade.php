@@ -1,283 +1,201 @@
-<x-app-layout>
-    <div class="bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800" dir="rtl">
-        <!-- قسم الترحيب والبحث -->
-        <div class="relative overflow-hidden">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-                <div class="text-center">
-                    <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-                        ساهم في صنع التغيير <span class="text-blue-600">مع منصة التطوع</span>
-                    </h1>
-                    <p class="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
-                        انضم إلى مجتمع المتطوعين وشارك في الحملات التطوعية أو قدم المساعدة لمن يحتاجها
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="{{ route('campaigns.index', ['type' => 'volunteer']) }}" class="px-8 py-3 bg-blue-600 text-white font-medium rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300">
-                            استعرض حملات التطوع
-                        </a>
-                        <a href="{{ route('campaigns.index', ['type' => 'help']) }}" class="px-8 py-3 bg-white text-blue-600 border border-blue-200 font-medium rounded-lg shadow-sm hover:bg-blue-50 transition-colors duration-300">
-                            استعرض حملات المساعدة
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- زخارف الخلفية -->
-            <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0 opacity-20">
-                <div class="absolute -top-24 -left-24 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl"></div>
-                <div class="absolute top-1/3 -right-24 w-96 h-96 bg-orange-200 rounded-full mix-blend-multiply filter blur-3xl"></div>
-            </div>
-        </div>
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="rtl">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- قسم الإحصائيات -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
-                    <div class="text-3xl font-bold text-blue-600 dark:text-blue-400">{{ rand(50, 200) }}</div>
-                    <div class="text-gray-600 dark:text-gray-300 mt-2">حملة تطوعية</div>
-                </div>
-                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
-                    <div class="text-3xl font-bold text-blue-600 dark:text-blue-400">{{ rand(500, 2000) }}</div>
-                    <div class="text-gray-600 dark:text-gray-300 mt-2">متطوع</div>
-                </div>
-                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
-                    <div class="text-3xl font-bold text-blue-600 dark:text-blue-400">{{ rand(20, 100) }}</div>
-                    <div class="text-gray-600 dark:text-gray-300 mt-2">منظمة</div>
-                </div>
-                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
-                    <div class="text-3xl font-bold text-blue-600 dark:text-blue-400">{{ rand(100, 500) }}K</div>
-                    <div class="text-gray-600 dark:text-gray-300 mt-2">ريال تبرعات</div>
-                </div>
-            </div>
-        </div>
+        <title>{{ config('app.name', 'منصة التطوع') }}</title>
 
-        <!-- قسم الحملات المميزة -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">حملات مميزة</h2>
-                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                    تعرف على أبرز الحملات التطوعية والمساعدات المتاحة حالياً
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- بطاقة حملة 1 -->
-                <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md border border-gray-100 dark:border-gray-700 transition-transform hover:-translate-y-1">
-                    <div class="h-48 bg-gray-200 dark:bg-gray-700 relative">
-                        <div class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">
-                            حملة تطوع
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">حملة تنظيف الشواطئ</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
-                            انضم إلينا في حملة تنظيف شواطئ المدينة والحفاظ على البيئة البحرية
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <div class="text-sm text-gray-500 dark:text-gray-400">
-                                <span>١٥ مايو ٢٠٢٣</span>
-                            </div>
-                            <a href="#" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium">
-                                التفاصيل &larr;
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- بطاقة حملة 2 -->
-                <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md border border-gray-100 dark:border-gray-700 transition-transform hover:-translate-y-1">
-                    <div class="h-48 bg-gray-200 dark:bg-gray-700 relative">
-                        <div class="absolute top-3 right-3 bg-orange-600 text-white text-xs font-bold px-3 py-1 rounded-full">
-                            حملة مساعدة
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">مساعدة المتضررين من السيول</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
-                            حملة لجمع التبرعات ومساعدة العائلات المتضررة من السيول في المناطق الجنوبية
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <div class="text-sm text-gray-500 dark:text-gray-400">
-                                <span>٢٠ أبريل ٢٠٢٣</span>
-                            </div>
-                            <a href="#" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium">
-                                التفاصيل &larr;
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- بطاقة حملة 3 -->
-                <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md border border-gray-100 dark:border-gray-700 transition-transform hover:-translate-y-1">
-                    <div class="h-48 bg-gray-200 dark:bg-gray-700 relative">
-                        <div class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">
-                            حملة تطوع
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">تعليم اللغة العربية للأطفال</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
-                            برنامج تطوعي لتعليم اللغة العربية للأطفال في المناطق النائية
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <div class="text-sm text-gray-500 dark:text-gray-400">
-                                <span>١ يونيو ٢٠٢٣</span>
-                            </div>
-                            <a href="#" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium">
-                                التفاصيل &larr;
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center mt-10">
-                <a href="{{ route('campaigns.index') }}" class="inline-flex items-center px-6 py-3 border border-blue-300 text-base font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800 dark:hover:bg-gray-700">
-                    عرض جميع الحملات
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                </a>
-            </div>
-        </div>
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=tajawal:400,500,600,700&display=swap" rel="stylesheet" />
 
-        <!-- قسم كيفية المشاركة -->
-                <!-- قسم كيفية المشاركة -->
-                <div class="bg-blue-50 dark:bg-gray-900 py-16">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">كيف تشارك معنا؟</h2>
-                    <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                        خطوات بسيطة للمشاركة في الحملات التطوعية أو طلب المساعدة
-                    </p>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-100 dark:border-gray-700 text-center">
-                        <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
+        <!-- Styles / Scripts -->
+        @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+            @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @else
+            <style>
+                /* ... الأنماط الموجودة ... */
+            </style>
+        @endif
+    </head>
+    <body class="font-tajawal antialiased bg-gray-50 dark:bg-gray-900">
+        <div class="min-h-screen">
+            <!-- الشريط العلوي -->
+            <nav class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700 shadow-sm">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-between h-16">
+                        <div class="flex">
+                            <div class="shrink-0 flex items-center">
+                                <a href="{{ route('dashboard') }}" class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
+                                    منصة التطوع
+                                </a>
+                            </div>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">إنشاء حساب</h3>
-                        <p class="text-gray-600 dark:text-gray-300">
-                            قم بإنشاء حساب جديد في المنصة للوصول إلى جميع الخدمات المتاحة
-                        </p>
-                    </div>
-                    
-                    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-100 dark:border-gray-700 text-center">
-                        <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                            </svg>
+                        <div class="flex items-center">
+                            @auth
+                                <a href="{{ url('/dashboard') }}" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 px-3 py-2 rounded-md text-sm font-medium">لوحة التحكم</a>
+                            @else
+                                <a href="{{ route('login') }}" class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 px-3 py-2 rounded-md text-sm font-medium">تسجيل الدخول</a>
+                                @if (Route::has('register'))
+                                    <a href="{{ route('register') }}" class="mr-4 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">إنشاء حساب</a>
+                                @endif
+                            @endauth
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">استعراض الحملات</h3>
-                        <p class="text-gray-600 dark:text-gray-300">
-                            تصفح الحملات المتاحة واختر ما يناسب اهتماماتك ومهاراتك
-                        </p>
-                    </div>
-                    
-                    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gray-100 dark:border-gray-700 text-center">
-                        <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" />
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">المشاركة والتفاعل</h3>
-                        <p class="text-gray-600 dark:text-gray-300">
-                            سجل في الحملة وشارك بوقتك ومهاراتك أو قدم المساعدة المطلوبة
-                        </p>
                     </div>
                 </div>
-            </div>
-        </div>
+            </nav>
 
-        <!-- قسم قصص النجاح -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">قصص نجاح</h2>
-                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                    تعرف على قصص نجاح المتطوعين وتأثيرهم الإيجابي في المجتمع
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- قصة نجاح 1 -->
-                <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md border border-gray-100 dark:border-gray-700 flex flex-col md:flex-row">
-                    <div class="md:w-1/3 bg-gray-200 dark:bg-gray-700"></div>
-                    <div class="p-6 md:w-2/3">
-                        <div class="flex items-center mb-4">
-                            <div class="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                </svg>
+            <!-- القسم الرئيسي -->
+            <div class="relative">
+                <!-- قسم الترحيب -->
+                <div class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-indigo-500 to-purple-600 text-white">
+                    <div class="max-w-7xl mx-auto">
+                        <div class="flex flex-col md:flex-row items-center">
+                            <div class="md:w-1/2 mb-10 md:mb-0">
+                                <h1 class="text-4xl md:text-5xl font-bold mb-6">منصة التطوع الأولى في المملكة</h1>
+                                <p class="text-xl mb-8 text-indigo-100">انضم إلينا اليوم وكن جزءاً من التغيير الإيجابي في المجتمع</p>
+                                <div class="flex flex-wrap gap-4">
+                                    <a href="{{ route('register') }}" class="bg-white text-indigo-600 hover:bg-indigo-50 px-6 py-3 rounded-lg font-medium text-lg transition duration-150 ease-in-out shadow-md">ابدأ التطوع الآن</a>
+                                    <a href="#campaigns" class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-indigo-600 px-6 py-3 rounded-lg font-medium text-lg transition duration-150 ease-in-out">استكشف الحملات</a>
+                                </div>
                             </div>
-                            <div class="mr-3">
-                                <h4 class="font-bold text-gray-900 dark:text-white">أحمد محمد</h4>
-                                <p class="text-sm text-gray-500 dark:text-gray-400">متطوع في حملة تشجير الأحياء</p>
+                            <div class="md:w-1/2 flex justify-center">
+                                <img src="{{ asset('images/volunteer-hero.svg') }}" alt="التطوع" class="w-full max-w-md">
                             </div>
                         </div>
-                        <blockquote class="text-gray-600 dark:text-gray-300 mb-4">
-                            "كانت تجربة التطوع في حملة تشجير الأحياء من أجمل التجارب التي خضتها. ساهمنا في زراعة أكثر من 500 شجرة في حينا، وأصبح المكان أكثر جمالاً وحيوية. أنصح الجميع بالمشاركة في مثل هذه الحملات لما لها من أثر إيجابي على المجتمع والبيئة."
-                        </blockquote>
                     </div>
                 </div>
-                
-                <!-- قصة نجاح 2 -->
-                <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md border border-gray-100 dark:border-gray-700 flex flex-col md:flex-row">
-                    <div class="md:w-1/3 bg-gray-200 dark:bg-gray-700"></div>
-                    <div class="p-6 md:w-2/3">
-                        <div class="flex items-center mb-4">
-                            <div class="h-10 w-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                </svg>
-                            </div>
-                            <div class="mr-3">
-                                <h4 class="font-bold text-gray-900 dark:text-white">نورة عبدالله</h4>
-                                <p class="text-sm text-gray-500 dark:text-gray-400">منظمة حملة تعليم الأطفال</p>
-                            </div>
-                        </div>
-                        <blockquote class="text-gray-600 dark:text-gray-300 mb-4">
-                            "بدأت حملة تعليم الأطفال بفكرة بسيطة، وبفضل المنصة استطعنا جمع أكثر من 50 متطوعاً للمساعدة في تعليم الأطفال في المناطق النائية. رأينا الفرحة في عيون الأطفال وهم يتعلمون مهارات جديدة، وهذا ما يدفعنا للاستمرار في العمل التطوعي."
-                        </blockquote>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center mt-10">
-                <a href="#" class="inline-flex items-center px-6 py-3 border border-blue-300 text-base font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800 dark:hover:bg-gray-700">
-                    المزيد من قصص النجاح
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                </a>
-            </div>
-        </div>
 
-        <!-- قسم انضم إلينا -->
-        <div class="bg-blue-600 dark:bg-blue-800 py-16">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center">
-                    <h2 class="text-3xl font-bold text-white mb-6">انضم إلينا اليوم وكن جزءاً من التغيير</h2>
-                    <p class="text-blue-100 mb-8 max-w-3xl mx-auto">
-                        سجل الآن في منصة التطوع واستكشف الفرص المتاحة للمساهمة في خدمة المجتمع وصنع الفرق
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        @auth
-                            <a href="{{ route('campaigns.index') }}" class="px-8 py-3 bg-white text-blue-600 font-medium rounded-lg shadow-md hover:bg-blue-50 transition-colors duration-300">
-                                استعرض الحملات
-                            </a>
-                        @else
-                            <a href="{{ route('register') }}" class="px-8 py-3 bg-white text-blue-600 font-medium rounded-lg shadow-md hover:bg-blue-50 transition-colors duration-300">
-                                سجل الآن
-                            </a>
-                            <a href="{{ route('login') }}" class="px-8 py-3 bg-blue-700 text-white border border-blue-500 font-medium rounded-lg shadow-md hover:bg-blue-800 transition-colors duration-300">
-                                تسجيل الدخول
-                            </a>
-                        @endauth
+                <!-- قسم الإحصائيات -->
+                <div class="py-12 bg-white dark:bg-gray-800">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            <div class="bg-indigo-50 dark:bg-indigo-900 p-6 rounded-xl text-center transform transition duration-300 hover:scale-105">
+                                <div class="text-4xl font-bold text-indigo-600 dark:text-indigo-400 mb-2">{{ \App\Models\Campaign::count() }}+</div>
+                                <div class="text-gray-700 dark:text-gray-300 font-medium">حملة تطوعية</div>
+                            </div>
+                            <div class="bg-indigo-50 dark:bg-indigo-900 p-6 rounded-xl text-center transform transition duration-300 hover:scale-105">
+                                <div class="text-4xl font-bold text-indigo-600 dark:text-indigo-400 mb-2">{{ \App\Models\User::count() }}+</div>
+                                <div class="text-gray-700 dark:text-gray-300 font-medium">متطوع مسجل</div>
+                            </div>
+                            <div class="bg-indigo-50 dark:bg-indigo-900 p-6 rounded-xl text-center transform transition duration-300 hover:scale-105">
+                                <div class="text-4xl font-bold text-indigo-600 dark:text-indigo-400 mb-2">{{ \App\Models\ParticipationRequest::where('status', 'approved')->count() }}+</div>
+                                <div class="text-gray-700 dark:text-gray-300 font-medium">مشاركة تطوعية</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <!-- قسم الحملات -->
+                <div id="campaigns" class="py-16 bg-gray-50 dark:bg-gray-900">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="text-center mb-12">
+                            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">أحدث الحملات التطوعية</h2>
+                            <p class="text-xl text-gray-600 dark:text-gray-400">انضم إلى إحدى هذه الحملات وكن جزءاً من التغيير</p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            @foreach(\App\Models\Campaign::latest()->take(6)->get() as $campaign)
+                                <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300">
+                                    @if($campaign->image)
+                                        <img src="{{ asset('storage/' . $campaign->image) }}" alt="{{ $campaign->title }}" class="w-full h-48 object-cover">
+                                    @else
+                                        <div class="w-full h-48 bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center">
+                                            <svg class="w-16 h-16 text-indigo-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
+                                            </svg>
+                                        </div>
+                                    @endif
+                                    <div class="p-6">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <span class="px-3 py-1 bg-{{ $campaign->type === 'volunteer' ? 'blue' : 'green' }}-100 text-{{ $campaign->type === 'volunteer' ? 'blue' : 'green' }}-800 dark:bg-{{ $campaign->type === 'volunteer' ? 'blue' : 'green' }}-900 dark:text-{{ $campaign->type === 'volunteer' ? 'blue' : 'green' }}-200 rounded-full text-xs font-medium">
+                                                {{ $campaign->type === 'volunteer' ? 'تطوع' : 'مساعدة' }}
+                                            </span>
+                                            <span class="text-sm text-gray-500 dark:text-gray-400">{{ $campaign->created_at->diffForHumans() }}</span>
+                                        </div>
+                                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">{{ $campaign->title }}</h3>
+                                        <p class="text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">{{ $campaign->description }}</p>
+                                        <a href="{{ route('campaigns.show', $campaign) }}" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out">عرض التفاصيل</a>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        
+                        <div class="text-center mt-10">
+                            <a href="{{ route('campaigns.index') }}" class="inline-block bg-indigo-100 hover:bg-indigo-200 text-indigo-700 dark:bg-indigo-900 dark:hover:bg-indigo-800 dark:text-indigo-300 px-6 py-3 rounded-lg font-medium transition duration-150 ease-in-out">عرض جميع الحملات</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- قسم كيف يعمل -->
+                <div class="py-16 bg-white dark:bg-gray-800">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="text-center mb-12">
+                            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">كيف تعمل منصتنا؟</h2>
+                            <p class="text-xl text-gray-600 dark:text-gray-400">خطوات بسيطة للمشاركة في العمل التطوعي</p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            <div class="text-center p-6">
+                                <div class="w-16 h-16 bg-indigo-100 dark:bg-indigo-900 rounded-full flex items-center justify-center text-indigo-600 dark:text-indigo-400 text-2xl font-bold mx-auto mb-4">1</div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">سجل في المنصة</h3>
+                                <p class="text-gray-600 dark:text-gray-400">أنشئ حسابك الشخصي أو المؤسسي للوصول إلى كافة الخدمات</p>
+                            </div>
+                            <div class="text-center p-6">
+                                <div class="w-16 h-16 bg-indigo-100 dark:bg-indigo-900 rounded-full flex items-center justify-center text-indigo-600 dark:text-indigo-400 text-2xl font-bold mx-auto mb-4">2</div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">ابحث عن الحملات</h3>
+                                <p class="text-gray-600 dark:text-gray-400">استعرض الحملات المتاحة واختر ما يناسب اهتماماتك ومهاراتك</p>
+                            </div>
+                            <div class="text-center p-6">
+                                <div class="w-16 h-16 bg-indigo-100 dark:bg-indigo-900 rounded-full flex items-center justify-center text-indigo-600 dark:text-indigo-400 text-2xl font-bold mx-auto mb-4">3</div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">شارك وأحدث فرقاً</h3>
+                                <p class="text-gray-600 dark:text-gray-400">قدم طلب المشاركة وكن جزءاً من التغيير الإيجابي في المجتمع</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                               <!-- قسم التذييل -->
+                               <footer class="bg-gray-900 text-white py-12">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="flex flex-col md:flex-row justify-between">
+                            <div class="mb-8 md:mb-0">
+                                <h3 class="text-2xl font-bold text-indigo-400 mb-4">منصة التطوع</h3>
+                                <p class="text-gray-400 max-w-md">منصة تربط المتطوعين بالفرص التطوعية وتسهل عملية المشاركة في الأعمال التطوعية والخيرية في جميع أنحاء المملكة.</p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-6">
+                                <div>
+                                    <h3 class="text-sm font-semibold text-white tracking-wider uppercase mb-4">روابط سريعة</h3>
+                                    <ul class="space-y-2">
+                                        <li><a href="{{ route('campaigns.index') }}" class="text-gray-400 hover:text-indigo-400">الحملات</a></li>
+                                        <li><a href="{{ route('login') }}" class="text-gray-400 hover:text-indigo-400">تسجيل الدخول</a></li>
+                                        <li><a href="{{ route('register') }}" class="text-gray-400 hover:text-indigo-400">إنشاء حساب</a></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-semibold text-white tracking-wider uppercase mb-4">تواصل معنا</h3>
+                                    <ul class="space-y-2">
+                                        <li><a href="#" class="text-gray-400 hover:text-indigo-400">عن المنصة</a></li>
+                                        <li><a href="#" class="text-gray-400 hover:text-indigo-400">اتصل بنا</a></li>
+                                        <li><a href="#" class="text-gray-400 hover:text-indigo-400">الأسئلة الشائعة</a></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-semibold text-white tracking-wider uppercase mb-4">قانوني</h3>
+                                    <ul class="space-y-2">
+                                        <li><a href="#" class="text-gray-400 hover:text-indigo-400">سياسة الخصوصية</a></li>
+                                        <li><a href="#" class="text-gray-400 hover:text-indigo-400">شروط الاستخدام</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-t border-gray-800 pt-8 mt-8 text-center">
+                            <p class="text-gray-400 text-sm">&copy; {{ date('Y') }} منصة التطوع. جميع الحقوق محفوظة.</p>
+                        </div>
+                    </div>
+                </footer>
             </div>
         </div>
-    </div>
-</x-app-layout>
+    </body>
+</html>
