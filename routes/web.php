@@ -8,7 +8,7 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ParticipationRequestController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-
+use App\Models\Category;
 Route::get('/', [CampaignController::class, 'index'])->name('home');
 
 Route::get('/user-check', function () {
@@ -63,5 +63,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/participation-requests/{participationRequest}', [ParticipationRequestController::class, 'destroy'])->name('participation-requests.destroy');
     
 });
+
+Route::get('/about', [App\Http\Controllers\PageController::class, 'about'])->name('about');
+Route::get('/contact', [App\Http\Controllers\PageController::class, 'contact'])->name('contact');
+Route::get('/faq', [App\Http\Controllers\PageController::class, 'faq'])->name('faq');
+Route::get('/privacy', [App\Http\Controllers\PageController::class, 'privacy'])->name('privacy');
+Route::get('/terms', [App\Http\Controllers\PageController::class, 'terms'])->name('terms');
 
 require __DIR__ . '/auth.php';
