@@ -21,6 +21,12 @@
                     <x-nav-link :href="route('campaigns.index', ['type' => 'help'])" :active="request()->routeIs('campaigns.index') && request()->type == 'help'">
                         {{ __('حملات المساعدة') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('badges.index')" :active="request()->routeIs('badges.*')">
+                        {{ __('الشارات') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('leaderboard.index')" :active="request()->routeIs('leaderboard.*')">
+                        {{ __('المتصدرون') }}
+                    </x-nav-link>
                     @auth
                         @if (Auth::user()->isTeam() || Auth::user()->isOrganization())
                             <x-nav-link :href="route('campaigns.my')" :active="request()->routeIs('campaigns.my')">
@@ -48,6 +54,11 @@
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 @auth
+                <!-- Points Display -->
+                <div class="mr-4 px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-semibold">
+                    <i class="fa fa-star text-yellow-500 mr-1"></i> {{ Auth::user()->getTotalPoints() }} نقطة
+                </div>
+                
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
@@ -64,6 +75,10 @@
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('الملف الشخصي') }}
+                        </x-dropdown-link>
+                        
+                        <x-dropdown-link :href="route('badges.user')">
+                            {{ __('شاراتي') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -110,6 +125,12 @@
             <x-responsive-nav-link :href="route('campaigns.index', ['type' => 'help'])" :active="request()->routeIs('campaigns.index') && request()->type == 'help'">
                 {{ __('حملات المساعدة') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('badges.index')" :active="request()->routeIs('badges.*')">
+                {{ __('الشارات') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('leaderboard.index')" :active="request()->routeIs('leaderboard.*')">
+                {{ __('المتصدرون') }}
+            </x-responsive-nav-link>
             @auth
                 @if (Auth::user()->isTeam() || Auth::user()->isOrganization())
                     <x-responsive-nav-link :href="route('campaigns.my')" :active="request()->routeIs('campaigns.my')">
@@ -136,6 +157,11 @@
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             @auth
+            <!-- Points Display for Mobile -->
+            <div class="px-4 py-2 mx-4 mb-3 bg-indigo-100 text-indigo-800 rounded-lg text-sm font-semibold">
+                <i class="fa fa-star text-yellow-500 mr-1"></i> {{ Auth::user()->getTotalPoints() }} نقطة
+            </div>
+            
             <div class="px-4">
                 <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
                 <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
@@ -144,6 +170,10 @@
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('الملف الشخصي') }}
+                </x-responsive-nav-link>
+                
+                <x-responsive-nav-link :href="route('badges.user')">
+                    {{ __('شاراتي') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->

@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -129,5 +130,139 @@ class User extends Authenticatable
     public function participationRequests(): HasMany
     {
         return $this->hasMany(ParticipationRequest::class);
+    }
+
+    /**
+     * الحصول على نقاط المستخدم
+     */
+    public function points(): HasMany
+    {
+        return $this->hasMany(Point::class);
+    }
+
+    /**
+     * الحصول على شارات المستخدم
+     */
+    public function badges(): BelongsToMany
+    {
+        return $this->belongsToMany(Badge::class, 'user_badges')
+            ->withPivot('earned_at', 'is_featured')
+            ->withTimestamps();
+    }
+
+    /**
+     * الحصول على مجموع نقاط المستخدم
+     *
+     * @return int
+     */
+    public function getTotalPoints(): int
+    {
+        return $this->points()->sum('amount');
+    }
+
+    /**
+     * الحصول على ترتيب المستخدم بين جميع المستخدمين
+     *
+     * @return int
+     */
+    public function getRank(): int
+    {
+        $usersRanked = User::selectRaw('users.id, users.name, SUM(points.amount) as total_points')
+            ->leftJoin('points', 'users.id', '=', 'points.user_id')
+            ->groupBy('users.id', 'users.name')
+            ->orderByRaw('total_points DESC')
+            ->get();
+
+        $rankList = $usersRanked->pluck('id')->toArray();
+        $position = array_search($this->id, $rankList);
+
+        return $position !== false ? $position + 1 : $usersRanked->count();
+    }
+
+    /**
+     * منح المستخدم شارة
+     *
+     * @param Badge $badge الشارة المراد منحها
+     * @param bool $featured هل هي شارة مميزة
+     * @return UserBadge
+     */
+    public function awardBadge(Badge $badge, bool $featured = false): UserBadge
+    {
+        // التحقق مما إذا كان المستخدم يملك الشارة بالفعل
+        $existingBadge = UserBadge::where('user_id', $this->id)
+            ->where('badge_id', $badge->id)
+            ->first();
+
+        if ($existingBadge) {
+            return $existingBadge;
+        }
+
+        // منح الشارة
+        return UserBadge::create([
+            'user_id' => $this->id,
+            'badge_id' => $badge->id,
+            'earned_at' => now(),
+            'is_featured' => $featured,
+        ]);
+    }
+
+    /**
+     * فحص الشارات المستحقة وإضافتها للمستخدم
+     *
+     * @return array الشارات الجديدة التي تم منحها
+     */
+    public function checkEligibleBadges(): array
+    {
+        $newBadges = [];
+        $allBadges = Badge::all();
+
+        foreach ($allBadges as $badge) {
+            // تخطي الشارات التي حصل عليها المستخدم بالفعل
+            if ($this->badges()->where('badge_id', $badge->id)->exists()) {
+                continue;
+            }
+
+            // التحقق من الأهلية
+            if ($badge->isEligible($this)) {
+                $userBadge = $this->awardBadge($badge);
+                $newBadges[] = $badge;
+            }
+        }
+
+        return $newBadges;
+    }
+    
+    /**
+     * الحصول على الشارات البارزة للمستخدم
+     *
+     * @param int $limit عدد الشارات المراد عرضها
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getFeaturedBadges(int $limit = 5)
+    {
+        // الحصول على الشارات المميزة أولاً
+        $featuredBadges = $this->badges()
+            ->wherePivot('is_featured', true)
+            ->latest('user_badges.earned_at')
+            ->take($limit)
+            ->get();
+            
+        // إذا كان عدد الشارات المميزة أقل من الحد المطلوب، أضف شارات أخرى
+        if ($featuredBadges->count() < $limit) {
+            $remainingCount = $limit - $featuredBadges->count();
+            $otherBadgesIds = $featuredBadges->pluck('id')->toArray();
+            
+            $otherBadges = $this->badges()
+                ->when(!empty($otherBadgesIds), function ($query) use ($otherBadgesIds) {
+                    return $query->whereNotIn('badges.id', $otherBadgesIds);
+                })
+                ->latest('user_badges.earned_at')
+                ->take($remainingCount)
+                ->get();
+                
+            $featuredBadges = $featuredBadges->merge($otherBadges);
+        }
+        
+        return $featuredBadges;
     }
 }

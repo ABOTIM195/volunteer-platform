@@ -1,18 +1,20 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DonationController;
+use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ParticipationRequestController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Middleware\CacheResponse;
 use Illuminate\Support\Facades\Route;
 use App\Models\Category;
-use App\Http\Middleware\CacheResponse;
 
 // Home page - added cache middleware with correct parameter passing
 Route::get('/', [CampaignController::class, 'index'])
@@ -76,7 +78,32 @@ Route::middleware('auth')->group(function () {
     Route::patch('/participation-requests/{participationRequest}', [ParticipationRequestController::class, 'update'])->name('participation-requests.update');
     Route::delete('/participation-requests/{participationRequest}', [ParticipationRequestController::class, 'destroy'])->name('participation-requests.destroy');
     
+    // Badges routes
+    Route::get('/my-badges', [BadgeController::class, 'userBadges'])->name('badges.user');
+    Route::post('/badges/{badge}/toggle-featured', [BadgeController::class, 'toggleFeatured'])->name('badges.toggle-featured');
 });
+
+// Badges public routes
+Route::get('/badges', [BadgeController::class, 'index'])
+    ->name('badges.index')
+    ->middleware([CacheResponse::class . ':60']);
+    
+Route::get('/badges/{badge}', [BadgeController::class, 'show'])
+    ->name('badges.show')
+    ->middleware([CacheResponse::class . ':60']);
+
+// مسارات لوحة المتصدرين
+Route::get('/leaderboard', [LeaderboardController::class, 'index'])
+    ->name('leaderboard.index')
+    ->middleware([CacheResponse::class . ':15']);
+    
+Route::get('/leaderboard/participation', [LeaderboardController::class, 'participation'])
+    ->name('leaderboard.participation')
+    ->middleware([CacheResponse::class . ':15']);
+    
+Route::get('/leaderboard/donation', [LeaderboardController::class, 'donation'])
+    ->name('leaderboard.donation')
+    ->middleware([CacheResponse::class . ':15']);
 
 // طرق صفحات الموقع العامة - تطبيق التخزين المؤقت بشكل صحيح
 Route::get('/about', function () {
