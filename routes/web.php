@@ -7,9 +7,17 @@ use App\Http\Controllers\DonationController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ParticipationRequestController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\LanguageController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Category;
-Route::get('/', [CampaignController::class, 'index'])->name('home');
+use App\Http\Middleware\CacheResponse;
+
+// Home page - added cache middleware with correct parameter passing
+Route::get('/', [CampaignController::class, 'index'])
+    ->name('home')
+    ->middleware([CacheResponse::class . ':60']); // Cache for 60 minutes
 
 Route::get('/user-check', function () {
     return view('user-check');
@@ -24,7 +32,13 @@ Route::get('/dashboard', function () {
 
 
 // Public campaign routes
-Route::resource('campaigns', CampaignController::class)->only(['index', 'show']);
+Route::get('/campaigns', [CampaignController::class, 'index'])
+    ->name('campaigns.index')
+    ->middleware([CacheResponse::class . ':30']); // Cache for 30 minutes
+
+Route::get('/campaigns/{campaign}', [CampaignController::class, 'show'])
+    ->name('campaigns.show')
+    ->middleware([CacheResponse::class . ':30']); // Cache for 30 minutes
 
 // Auth routes
 Route::middleware('auth')->group(function () {
@@ -38,7 +52,6 @@ Route::middleware('auth')->group(function () {
 
     // Campaign routes for authorized users
     Route::get('/my-campaigns', [CampaignController::class, 'myCampaigns'])->name('campaigns.my');
-    // Route::get('/campaigns/create', [CampaignController::class, 'create'])->name('campaigns.create');
     Route::post('/campaigns', [CampaignController::class, 'store'])->name('campaigns.store');
     Route::get('/campaigns/{campaign}/edit', [CampaignController::class, 'edit'])->name('campaigns.edit');
     Route::put('/campaigns/{campaign}', [CampaignController::class, 'update'])->name('campaigns.update');
@@ -65,26 +78,31 @@ Route::middleware('auth')->group(function () {
     
 });
 
-// طرق صفحات الموقع العامة
+// طرق صفحات الموقع العامة - تطبيق التخزين المؤقت بشكل صحيح
 Route::get('/about', function () {
     return view('about');
-})->name('about');
+})->name('about')->middleware([CacheResponse::class . ':1440']);
 
 Route::get('/faq', function () {
     return view('faq');
-})->name('faq');
+})->name('faq')->middleware([CacheResponse::class . ':1440']);
 
 Route::get('/privacy', function () {
     return view('privacy');
-})->name('privacy');
+})->name('privacy')->middleware([CacheResponse::class . ':1440']);
+
+Route::get('/terms-of-service', function () {
+    return view('terms');
+})->name('terms-of-service')->middleware([CacheResponse::class . ':1440']);
 
 // طرق صفحة الاتصال
-Route::get('/contact', [App\Http\Controllers\ContactController::class, 'index'])->name('contact');
-Route::post('/contact', [App\Http\Controllers\ContactController::class, 'store'])->name('contact.store');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 // طريق الاشتراك في النشرة البريدية
-Route::post('/newsletter/subscribe', [App\Http\Controllers\NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
+Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
 
-Route::get('/terms', [App\Http\Controllers\PageController::class, 'terms'])->name('terms');
+// طرق تغيير اللغة
+Route::get('/language/{locale}', [LanguageController::class, 'switch'])->name('language.switch');
 
 require __DIR__ . '/auth.php';
