@@ -32,6 +32,11 @@ class User extends Authenticatable
         'password',
         'type',
         'avatar', // إضافة حقل الصورة الشخصية
+        'description', // نبذة تعريفية
+        'website', // الموقع الإلكتروني
+        'phone', // رقم الهاتف
+        'twitter', // حساب تويتر
+        'instagram', // حساب انستجرام
     ];
 
     /**
@@ -240,29 +245,10 @@ class User extends Authenticatable
      */
     public function getFeaturedBadges(int $limit = 5)
     {
-        // الحصول على الشارات المميزة أولاً
-        $featuredBadges = $this->badges()
-            ->wherePivot('is_featured', true)
-            ->latest('user_badges.earned_at')
+        return $this->badges()
+            ->with('badge')  // تحميل علاقة الشارة بشكل مسبق
+            ->orderByDesc('user_badges.earned_at')
             ->take($limit)
             ->get();
-            
-        // إذا كان عدد الشارات المميزة أقل من الحد المطلوب، أضف شارات أخرى
-        if ($featuredBadges->count() < $limit) {
-            $remainingCount = $limit - $featuredBadges->count();
-            $otherBadgesIds = $featuredBadges->pluck('id')->toArray();
-            
-            $otherBadges = $this->badges()
-                ->when(!empty($otherBadgesIds), function ($query) use ($otherBadgesIds) {
-                    return $query->whereNotIn('badges.id', $otherBadgesIds);
-                })
-                ->latest('user_badges.earned_at')
-                ->take($remainingCount)
-                ->get();
-                
-            $featuredBadges = $featuredBadges->merge($otherBadges);
-        }
-        
-        return $featuredBadges;
     }
 }

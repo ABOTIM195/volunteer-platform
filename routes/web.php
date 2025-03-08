@@ -95,15 +95,15 @@ Route::get('/badges/{badge}', [BadgeController::class, 'show'])
 // مسارات لوحة المتصدرين
 Route::get('/leaderboard', [LeaderboardController::class, 'index'])
     ->name('leaderboard.index')
-    ->middleware([CacheResponse::class . ':15']);
+    ->middleware([CacheResponse::class . ':5']);
     
 Route::get('/leaderboard/participation', [LeaderboardController::class, 'participation'])
     ->name('leaderboard.participation')
-    ->middleware([CacheResponse::class . ':15']);
+    ->middleware([CacheResponse::class . ':5']);
     
 Route::get('/leaderboard/donation', [LeaderboardController::class, 'donation'])
     ->name('leaderboard.donation')
-    ->middleware([CacheResponse::class . ':15']);
+    ->middleware([CacheResponse::class . ':5']);
 
 Route::get('/leaderboard/search', [LeaderboardController::class, 'search'])
     ->name('leaderboard.search')

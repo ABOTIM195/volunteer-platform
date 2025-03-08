@@ -51,6 +51,13 @@ class ProfileController extends Controller
             $request->user()->avatar = null;
         }
     
+        // معالجة الحقول الجديدة
+        $request->user()->description = $request->description;
+        $request->user()->website = $request->website;
+        $request->user()->phone = $request->phone;
+        $request->user()->twitter = $request->twitter;
+        $request->user()->instagram = $request->instagram;
+    
         $request->user()->save();
     
         return Redirect::route('profile.edit')->with('status', 'profile-updated');

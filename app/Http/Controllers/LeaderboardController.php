@@ -15,6 +15,7 @@ class LeaderboardController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
+        $userType = $request->input('user_type');
         
         // الحصول على المستخدمين المصنفين حسب مجموع النقاط
         $query = User::selectRaw('users.id, users.name, users.email, users.type, users.avatar, SUM(points.amount) as total_points')
@@ -23,6 +24,11 @@ class LeaderboardController extends Controller
         // إضافة شرط البحث إذا تم تقديمه
         if ($search) {
             $query->where('users.name', 'like', '%' . $search . '%');
+        }
+        
+        // إضافة شرط تصفية نوع المستخدم إذا تم تقديمه
+        if ($userType) {
+            $query->where('users.type', $userType);
         }
         
         $topUsers = $query->groupBy('users.id', 'users.name', 'users.email', 'users.type', 'users.avatar')
@@ -37,7 +43,7 @@ class LeaderboardController extends Controller
             $currentUserRank = $currentUser->getRank();
         }
         
-        return view('leaderboard.index', compact('topUsers', 'currentUserRank', 'search'));
+        return view('leaderboard.index', compact('topUsers', 'currentUserRank', 'search', 'userType'));
     }
     
     /**
@@ -46,6 +52,7 @@ class LeaderboardController extends Controller
     public function participation(Request $request)
     {
         $search = $request->input('search');
+        $userType = $request->input('user_type');
         
         // الحصول على المستخدمين المصنفين حسب عدد المشاركات في الحملات
         $query = User::selectRaw('users.id, users.name, users.email, users.type, users.avatar, COUNT(participation_requests.id) as participation_count, MAX(participation_requests.created_at) as last_participation')
@@ -57,6 +64,11 @@ class LeaderboardController extends Controller
         // إضافة شرط البحث إذا تم تقديمه
         if ($search) {
             $query->where('users.name', 'like', '%' . $search . '%');
+        }
+        
+        // إضافة شرط تصفية نوع المستخدم إذا تم تقديمه
+        if ($userType) {
+            $query->where('users.type', $userType);
         }
         
         $topUsers = $query->groupBy('users.id', 'users.name', 'users.email', 'users.type', 'users.avatar')
@@ -82,7 +94,7 @@ class LeaderboardController extends Controller
                 ->count();
         }
             
-        return view('leaderboard.participation', compact('topUsers', 'currentUserRank', 'currentUserParticipationCount', 'search'));
+        return view('leaderboard.participation', compact('topUsers', 'currentUserRank', 'currentUserParticipationCount', 'search', 'userType'));
     }
     
     /**
@@ -91,6 +103,7 @@ class LeaderboardController extends Controller
     public function donation(Request $request)
     {
         $search = $request->input('search');
+        $userType = $request->input('user_type');
         
         // الحصول على المستخدمين المصنفين حسب إجمالي مبالغ التبرع
         $query = User::selectRaw('users.id, users.name, users.email, users.type, users.avatar, SUM(donations.amount) as total_donation_amount, COUNT(donations.id) as donation_count')
@@ -99,6 +112,11 @@ class LeaderboardController extends Controller
         // إضافة شرط البحث إذا تم تقديمه
         if ($search) {
             $query->where('users.name', 'like', '%' . $search . '%');
+        }
+        
+        // إضافة شرط تصفية نوع المستخدم إذا تم تقديمه
+        if ($userType) {
+            $query->where('users.type', $userType);
         }
         
         $topUsers = $query->groupBy('users.id', 'users.name', 'users.email', 'users.type', 'users.avatar')
@@ -124,7 +142,7 @@ class LeaderboardController extends Controller
             $currentUserDonationCount = $currentUser->donations()->count();
         }
             
-        return view('leaderboard.donation', compact('topUsers', 'currentUserRank', 'currentUserTotalDonation', 'currentUserDonationCount', 'search'));
+        return view('leaderboard.donation', compact('topUsers', 'currentUserRank', 'currentUserTotalDonation', 'currentUserDonationCount', 'search', 'userType'));
     }
     
     /**
@@ -133,9 +151,10 @@ class LeaderboardController extends Controller
     public function search(Request $request)
     {
         $search = $request->input('search');
+        $userType = $request->input('user_type');
         $type = $request->input('type', 'points'); // points, participation, donation
         
-        if ($search) {
+        if ($search || $userType) {
             switch ($type) {
                 case 'participation':
                     return $this->participation($request);
@@ -146,7 +165,7 @@ class LeaderboardController extends Controller
             }
         }
         
-        // إذا لم يتم تقديم مصطلح بحث، إعادة توجيه إلى لوحة المتصدرين الرئيسية
+        // إذا لم يتم تقديم مصطلح بحث أو نوع مستخدم، إعادة توجيه إلى لوحة المتصدرين الرئيسية
         return redirect()->route('leaderboard.index');
     }
 }

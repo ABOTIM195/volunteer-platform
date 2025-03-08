@@ -4,7 +4,7 @@
 <div class="container py-8">
     <div class="mb-8 text-center">
         <h1 class="mb-2 text-3xl font-bold text-gray-800">لوحة المتصدرين - التبرعات</h1>
-        <p class="text-gray-600">المتبرعون الأكثر سخاءً في دعم الحملات التطوعية</p>
+        <p class="text-gray-600">أكثر المتطوعين مساهمة بالتبرعات في منصتنا</p>
     </div>
 
     <div class="mb-8">
@@ -22,10 +22,10 @@
         
         <!-- نموذج البحث -->
         <div class="mb-6 mx-auto max-w-md">
-            <form action="{{ route('leaderboard.search') }}" method="GET" class="flex items-center">
+            <form action="{{ route('leaderboard.search') }}" method="GET" class="space-y-3">
                 <input type="hidden" name="type" value="donation">
                 <div class="relative flex-grow">
-                    <input type="text" name="search" value="{{ $search ?? '' }}" placeholder="ابحث عن متبرع..." 
+                    <input type="text" name="search" value="{{ $search ?? '' }}" placeholder="ابحث عن متطوع..." 
                         class="w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 focus:border-indigo-500 focus:outline-none">
                     <button type="submit" class="absolute inset-y-0 left-0 flex items-center px-3 text-indigo-600">
                         <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
@@ -33,19 +33,46 @@
                         </svg>
                     </button>
                 </div>
+                
+                <!-- تصفية حسب نوع المستخدم -->
+                <div class="flex flex-wrap items-center justify-center gap-2">
+                    <span class="text-gray-700">تصفية حسب النوع:</span>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="{{ route('leaderboard.donation') }}" class="rounded-lg {{ !request('user_type') ? 'bg-indigo-100 text-indigo-800' : 'bg-gray-100 text-gray-700' }} px-3 py-1 text-sm">
+                            الكل
+                        </a>
+                        <a href="{{ route('leaderboard.donation', ['user_type' => 'regular']) }}" class="rounded-lg {{ request('user_type') == 'regular' ? 'bg-indigo-100 text-indigo-800' : 'bg-gray-100 text-gray-700' }} px-3 py-1 text-sm">
+                            أفراد
+                        </a>
+                        <a href="{{ route('leaderboard.donation', ['user_type' => 'team']) }}" class="rounded-lg {{ request('user_type') == 'team' ? 'bg-indigo-100 text-indigo-800' : 'bg-gray-100 text-gray-700' }} px-3 py-1 text-sm">
+                            فرق
+                        </a>
+                        <a href="{{ route('leaderboard.donation', ['user_type' => 'organization']) }}" class="rounded-lg {{ request('user_type') == 'organization' ? 'bg-indigo-100 text-indigo-800' : 'bg-gray-100 text-gray-700' }} px-3 py-1 text-sm">
+                            منظمات
+                        </a>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
 
     <div class="mx-auto max-w-4xl">
-        @if(isset($search) && $search && $topUsers->isEmpty())
+        @if((isset($search) && $search && $topUsers->isEmpty()) || (isset($userType) && $userType && $topUsers->isEmpty()))
             <div class="mb-8 rounded-lg bg-yellow-50 p-4 text-center">
                 <p class="text-yellow-700">
-                    <span class="mb-2 block text-lg font-semibold">لا توجد نتائج للبحث</span>
-                    لم يتم العثور على متبرعين بالاسم "{{ $search }}". حاول استخدام كلمات بحث مختلفة.
+                    <span class="mb-2 block text-lg font-semibold">لا توجد نتائج</span>
+                    @if(isset($search) && $search)
+                        لم يتم العثور على متطوعين بالاسم "{{ $search }}"
+                        @if(isset($userType) && $userType)
+                            من نوع {{ $userType == 'regular' ? 'الأفراد' : ($userType == 'team' ? 'الفرق' : 'المنظمات') }}
+                        @endif
+                    @elseif(isset($userType) && $userType)
+                        لم يتم العثور على متطوعين من نوع {{ $userType == 'regular' ? 'الأفراد' : ($userType == 'team' ? 'الفرق' : 'المنظمات') }}
+                    @endif
+                    . حاول استخدام معايير تصفية مختلفة.
                 </p>
                 <a href="{{ route('leaderboard.donation') }}" class="mt-2 inline-block rounded-lg bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700">
-                    عرض جميع المتبرعين
+                    عرض جميع المتطوعين
                 </a>
             </div>
         @else
@@ -134,7 +161,7 @@
                                 المرتبة
                             </th>
                             <th scope="col" class="px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500">
-                                المتبرع
+                                المتطوع
                             </th>
                             <th scope="col" class="px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500">
                                 إجمالي التبرعات

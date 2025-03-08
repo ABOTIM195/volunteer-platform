@@ -4,7 +4,7 @@
 <div class="container py-8">
     <div class="mb-8 text-center">
         <h1 class="mb-2 text-3xl font-bold text-gray-800">لوحة المتصدرين - المشاركة</h1>
-        <p class="text-gray-600">المتطوعون الأكثر نشاطاً في المشاركة بالحملات التطوعية</p>
+        <p class="text-gray-600">أكثر المتطوعين مشاركة في الحملات التطوعية</p>
     </div>
 
     <div class="mb-8">
@@ -22,7 +22,7 @@
         
         <!-- نموذج البحث -->
         <div class="mb-6 mx-auto max-w-md">
-            <form action="{{ route('leaderboard.search') }}" method="GET" class="flex items-center">
+            <form action="{{ route('leaderboard.search') }}" method="GET" class="space-y-3">
                 <input type="hidden" name="type" value="participation">
                 <div class="relative flex-grow">
                     <input type="text" name="search" value="{{ $search ?? '' }}" placeholder="ابحث عن متطوع..." 
@@ -33,16 +33,43 @@
                         </svg>
                     </button>
                 </div>
+                
+                <!-- تصفية حسب نوع المستخدم -->
+                <div class="flex flex-wrap items-center justify-center gap-2">
+                    <span class="text-gray-700">تصفية حسب النوع:</span>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="{{ route('leaderboard.participation') }}" class="rounded-lg {{ !request('user_type') ? 'bg-indigo-100 text-indigo-800' : 'bg-gray-100 text-gray-700' }} px-3 py-1 text-sm">
+                            الكل
+                        </a>
+                        <a href="{{ route('leaderboard.participation', ['user_type' => 'regular']) }}" class="rounded-lg {{ request('user_type') == 'regular' ? 'bg-indigo-100 text-indigo-800' : 'bg-gray-100 text-gray-700' }} px-3 py-1 text-sm">
+                            أفراد
+                        </a>
+                        <a href="{{ route('leaderboard.participation', ['user_type' => 'team']) }}" class="rounded-lg {{ request('user_type') == 'team' ? 'bg-indigo-100 text-indigo-800' : 'bg-gray-100 text-gray-700' }} px-3 py-1 text-sm">
+                            فرق
+                        </a>
+                        <a href="{{ route('leaderboard.participation', ['user_type' => 'organization']) }}" class="rounded-lg {{ request('user_type') == 'organization' ? 'bg-indigo-100 text-indigo-800' : 'bg-gray-100 text-gray-700' }} px-3 py-1 text-sm">
+                            منظمات
+                        </a>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
 
     <div class="mx-auto max-w-4xl">
-        @if(isset($search) && $search && $topUsers->isEmpty())
+        @if((isset($search) && $search && $topUsers->isEmpty()) || (isset($userType) && $userType && $topUsers->isEmpty()))
             <div class="mb-8 rounded-lg bg-yellow-50 p-4 text-center">
                 <p class="text-yellow-700">
-                    <span class="mb-2 block text-lg font-semibold">لا توجد نتائج للبحث</span>
-                    لم يتم العثور على متطوعين بالاسم "{{ $search }}". حاول استخدام كلمات بحث مختلفة.
+                    <span class="mb-2 block text-lg font-semibold">لا توجد نتائج</span>
+                    @if(isset($search) && $search)
+                        لم يتم العثور على متطوعين بالاسم "{{ $search }}"
+                        @if(isset($userType) && $userType)
+                            من نوع {{ $userType == 'regular' ? 'الأفراد' : ($userType == 'team' ? 'الفرق' : 'المنظمات') }}
+                        @endif
+                    @elseif(isset($userType) && $userType)
+                        لم يتم العثور على متطوعين من نوع {{ $userType == 'regular' ? 'الأفراد' : ($userType == 'team' ? 'الفرق' : 'المنظمات') }}
+                    @endif
+                    . حاول استخدام معايير تصفية مختلفة.
                 </p>
                 <a href="{{ route('leaderboard.participation') }}" class="mt-2 inline-block rounded-lg bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700">
                     عرض جميع المتطوعين
