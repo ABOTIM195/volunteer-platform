@@ -105,6 +105,10 @@ Route::get('/leaderboard/donation', [LeaderboardController::class, 'donation'])
     ->name('leaderboard.donation')
     ->middleware([CacheResponse::class . ':15']);
 
+Route::get('/leaderboard/search', [LeaderboardController::class, 'search'])
+    ->name('leaderboard.search')
+    ->middleware([CacheResponse::class . ':5']);
+
 // طرق صفحات الموقع العامة - تطبيق التخزين المؤقت بشكل صحيح
 Route::get('/about', function () {
     return view('about');
