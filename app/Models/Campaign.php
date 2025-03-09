@@ -54,6 +54,14 @@ class Campaign extends Model
     {
         return $this->belongsTo(User::class, 'creator_id');
     }
+    
+    /**
+     * Alias for creator - to match dashboard expectations
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'creator_id');
+    }
 
     /**
      * Get the donations for the campaign.
@@ -85,6 +93,29 @@ class Campaign extends Model
     public function participationRequests(): HasMany
     {
         return $this->hasMany(ParticipationRequest::class);
+    }
+
+    /**
+     * Get the image URL attribute
+     */
+    public function getImageUrlAttribute()
+    {
+        if (!$this->image) {
+            return asset('images/campaign-placeholder.jpg');
+        }
+        
+        // إذا كانت الصورة تحتوي على مسار URL كامل
+        if (filter_var($this->image, FILTER_VALIDATE_URL)) {
+            return $this->image;
+        }
+        
+        // إذا كانت الصورة مخزنة في مجلد التخزين
+        if (strpos($this->image, 'storage/') === 0) {
+            return asset($this->image);
+        }
+        
+        // إذا كانت الصورة مخزنة في مجلد التخزين بدون "storage/"
+        return asset('storage/' . $this->image);
     }
 
     /**

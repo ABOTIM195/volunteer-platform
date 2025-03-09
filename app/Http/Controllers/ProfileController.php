@@ -33,30 +33,11 @@ class ProfileController extends Controller
             $request->user()->email_verified_at = null;
         }
     
-        // معالجة تحميل الصورة الشخصية
-        if ($request->hasFile('avatar')) {
-            // حذف الصورة القديمة إذا وجدت
-            if ($request->user()->avatar) {
-                Storage::disk('public')->delete($request->user()->avatar);
-            }
-            
-            // تخزين الصورة الجديدة
-            $avatarPath = $request->file('avatar')->store('avatars', 'public');
-            $request->user()->avatar = $avatarPath;
-        } elseif ($request->boolean('remove_avatar')) {
-            // إزالة الصورة الحالية إذا طلب المستخدم ذلك
-            if ($request->user()->avatar) {
-                Storage::disk('public')->delete($request->user()->avatar);
-            }
-            $request->user()->avatar = null;
+        // Handle profile photo upload
+        if ($request->hasFile('profile_photo')) {
+            $path = $request->file('profile_photo')->store('profile-photos', 'public');
+            $request->user()->profile_photo_path = $path;
         }
-    
-        // معالجة الحقول الجديدة
-        $request->user()->description = $request->description;
-        $request->user()->website = $request->website;
-        $request->user()->phone = $request->phone;
-        $request->user()->twitter = $request->twitter;
-        $request->user()->instagram = $request->instagram;
     
         $request->user()->save();
     

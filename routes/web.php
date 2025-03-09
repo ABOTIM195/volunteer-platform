@@ -12,6 +12,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Middleware\CacheResponse;
 use Illuminate\Support\Facades\Route;
 use App\Models\Category;
@@ -28,9 +29,13 @@ Route::get('/user-check', function () {
 Route::get('/change-user-type', [UserController::class, 'showChangeTypeForm'])->name('show-change-user-type');
 Route::post('/change-user-type', [UserController::class, 'changeType'])->name('change-user-type');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// قبل التعديل
+
+// بهذا المسار
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
+// بعد التعديل
 
 
 // Public campaign routes
@@ -50,7 +55,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // أضف هذا المسار للاختبار
+    // استبدل هذا المسار
     Route::get('/test-campaign-create', [CampaignController::class, 'create'])->name("campaigns.create");
+    
+    // بهذا المسار
+    // Route::get('/campaigns/create', [CampaignController::class, 'create'])->name('campaigns.create');
 
     // Campaign routes for authorized users
     Route::get('/my-campaigns', [CampaignController::class, 'myCampaigns'])->name('campaigns.my');

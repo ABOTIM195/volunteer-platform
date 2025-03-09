@@ -1,158 +1,165 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
-            {{ __('الملف الشخصي') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-10 bg-gray-50 dark:bg-gray-900">
+    <div class="py-12 bg-gray-50 dark:bg-gray-900">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <!-- بطاقة الملف الشخصي الرئيسية -->
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-lg sm:rounded-lg mb-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-lg rounded-lg mb-6">
                 <div class="relative">
-                    <!-- غلاف الملف الشخصي -->
-                    <div class="h-48 bg-gradient-to-r from-indigo-500 to-purple-600 w-full"></div>
+                    <!-- صورة الغلاف -->
+                    <div class="h-48 bg-gradient-to-r from-blue-500 to-teal-400"></div>
                     
-                    <!-- صورة المستخدم والمعلومات الأساسية -->
-                    <div class="relative px-6 pb-6">
-                        <div class="absolute -top-16 right-10">
-                            @if(auth()->user()->avatar)
-                                <img src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="{{ auth()->user()->name }}" class="w-32 h-32 rounded-full object-cover border-4 border-white dark:border-gray-800 shadow-xl">
-                            @else
-                                <div class="w-32 h-32 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center text-4xl font-bold text-indigo-500 dark:text-indigo-300 border-4 border-white dark:border-gray-800 shadow-xl">
-                                    {{ substr(auth()->user()->name, 0, 1) }}
+                    <!-- صورة الملف الشخصي -->
+                    <div class="absolute bottom-0 left-10 transform translate-y-1/2 rtl:left-auto rtl:right-10">
+                        <div class="relative group">
+                            <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-xl bg-white dark:bg-gray-700">
+                                @if(Auth::user()->profile_photo_path)
+                                    <img src="{{ Storage::url(Auth::user()->profile_photo_path) }}" alt="{{ Auth::user()->name }}" class="w-full h-full object-cover">
+                                @else
+                                    <div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-600">
+                                        <span class="text-4xl text-gray-500 dark:text-gray-400">{{ substr(Auth::user()->name, 0, 1) }}</span>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="p-6 pt-20">
+                    <div class="flex flex-col md:flex-row">
+                        <!-- معلومات المستخدم -->
+                        <div class="md:w-1/3 mb-6 md:mb-0 text-right">
+                            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">{{ Auth::user()->name }}</h2>
+                            <p class="text-gray-600 dark:text-gray-400">{{ Auth::user()->email }}</p>
+                            
+                            @if(Auth::user()->city)
+                                <div class="flex items-center mt-2 text-gray-600 dark:text-gray-400 justify-end">
+                                    <span>{{ Auth::user()->city }}</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                </div>
+                            @endif
+                            
+                            @if(Auth::user()->phone)
+                                <div class="flex items-center mt-2 text-gray-600 dark:text-gray-400 justify-end">
+                                    <span dir="ltr">{{ Auth::user()->phone }}</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                    </svg>
+                                </div>
+                            @endif
+                            
+                            @if(Auth::user()->bio)
+                                <div class="mt-4 text-right">
+                                    <h3 class="text-md font-semibold text-gray-900 dark:text-white mb-2">نبذة عني</h3>
+                                    <p class="text-gray-600 dark:text-gray-400">{{ Auth::user()->bio }}</p>
                                 </div>
                             @endif
                         </div>
                         
-                        <div class="pt-20 md:pt-5 md:mr-40">
-                            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-                                <div>
-                                    <h1 class="text-2xl font-bold text-gray-800 dark:text-white">{{ auth()->user()->name }}</h1>
-                                    <p class="text-gray-500 dark:text-gray-400">{{ auth()->user()->email }}</p>
-                                    <div class="mt-2">
-                                        <span class="px-4 py-1 text-sm bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 rounded-full">
-                                            @if(auth()->user()->type === 'regular')
-                                                متطوع فردي
-                                            @elseif(auth()->user()->type === 'team')
-                                                فريق تطوعي
-                                            @elseif(auth()->user()->type === 'organization')
-                                                منظمة
-                                            @endif
-                                        </span>
-                                        <span class="px-4 py-1 text-sm bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 rounded-full mr-2">
-                                            {{ auth()->user()->points()->sum('amount') }} نقطة
-                                        </span>
+                        <!-- إحصائيات المستخدم -->
+                        <div class="md:w-2/3 md:pr-6 rtl:md:pr-0 rtl:md:pl-6">
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3 text-right border-r-4 border-blue-500 pr-2">إحصائيات النشاط</h3>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <div class="bg-white dark:bg-gray-700 p-4 rounded-lg text-center shadow-md border-r-4 border-blue-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                                    <div class="flex flex-col items-center">
+                                        <div class="rounded-full bg-blue-100 dark:bg-blue-900 p-3 mb-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600 dark:text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                            </svg>
+                                        </div>
+                                        <span class="block text-3xl font-bold text-blue-600 dark:text-blue-300">{{ Auth::user()->participationRequests()->where('status', 'approved')->count() }}</span>
+                                        <span class="text-sm text-gray-600 dark:text-gray-300">مشاركات</span>
                                     </div>
                                 </div>
                                 
-                                <div class="flex mt-4 md:mt-0 space-x-2 space-x-reverse">
-                                    <a href="{{ route('campaigns.create') }}" class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700">إنشاء حملة جديدة</a>
-                                    <a href="{{ route('leaderboard.index') }}" class="px-4 py-2 text-sm font-medium text-indigo-600 bg-indigo-100 rounded-md hover:bg-indigo-200 dark:bg-indigo-900 dark:text-indigo-300 dark:hover:bg-indigo-800">لوحة المتصدرين</a>
+                                <div class="bg-white dark:bg-gray-700 p-4 rounded-lg text-center shadow-md border-r-4 border-green-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                                    <div class="flex flex-col items-center">
+                                        <div class="rounded-full bg-green-100 dark:bg-green-900 p-3 mb-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600 dark:text-green-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                            </svg>
+                                        </div>
+                                        <span class="block text-3xl font-bold text-green-600 dark:text-green-300">{{ Auth::user()->badges()->count() }}</span>
+                                        <span class="text-sm text-gray-600 dark:text-gray-300">شارات</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white dark:bg-gray-700 p-4 rounded-lg text-center shadow-md border-r-4 border-purple-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                                    <div class="flex flex-col items-center">
+                                        <div class="rounded-full bg-purple-100 dark:bg-purple-900 p-3 mb-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600 dark:text-purple-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                                            </svg>
+                                        </div>
+                                        <span class="block text-3xl font-bold text-purple-600 dark:text-purple-300">{{ Auth::user()->comments()->count() }}</span>
+                                        <span class="text-sm text-gray-600 dark:text-gray-300">تعليقات</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white dark:bg-gray-700 p-4 rounded-lg text-center shadow-md border-r-4 border-amber-500 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                                    <div class="flex flex-col items-center">
+                                        <div class="rounded-full bg-amber-100 dark:bg-amber-900 p-3 mb-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amber-600 dark:text-amber-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                            </svg>
+                                        </div>
+                                        <span class="block text-3xl font-bold text-amber-600 dark:text-amber-300">{{ Auth::user()->likes()->count() }}</span>
+                                        <span class="text-sm text-gray-600 dark:text-gray-300">إعجابات</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- إحصائيات سريعة -->
-                <div class="border-t border-gray-200 dark:border-gray-700">
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-6">
-                        <div class="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                            <p class="text-3xl font-bold text-indigo-600 dark:text-indigo-400">{{ auth()->user()->campaigns()->count() }}</p>
-                            <p class="text-sm text-gray-500 dark:text-gray-400">الحملات المنشأة</p>
-                        </div>
-                        <div class="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                            <p class="text-3xl font-bold text-green-600 dark:text-green-400">{{ auth()->user()->participations()->where('status', 'approved')->count() }}</p>
-                            <p class="text-sm text-gray-500 dark:text-gray-400">المشاركات</p>
-                        </div>
-                        <div class="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                            <p class="text-3xl font-bold text-amber-600 dark:text-amber-400">{{ auth()->user()->donations()->count() }}</p>
-                            <p class="text-sm text-gray-500 dark:text-gray-400">التبرعات</p>
-                        </div>
-                        <div class="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                            <p class="text-3xl font-bold text-purple-600 dark:text-purple-400">{{ auth()->user()->badges()->count() }}</p>
-                            <p class="text-sm text-gray-500 dark:text-gray-400">الشارات</p>
-                        </div>
-                    </div>
-                </div>
             </div>
             
-            <!-- عرض الشارات -->
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-lg sm:rounded-lg mb-8 p-6">
-                <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-xl font-bold text-gray-800 dark:text-white flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                        </svg>
-                        شاراتي
-                    </h3>
-                    <a href="#" class="text-sm text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300">عرض الكل</a>
+            <!-- تبويبات الإعدادات -->
+            <div x-data="{ activeTab: 'profile' }" class="bg-white dark:bg-gray-800 overflow-hidden shadow-lg rounded-lg">
+                <div class="border-b border-gray-200 dark:border-gray-700">
+                    <ul class="flex flex-wrap -mb-px text-sm font-medium text-center">
+                        <li class="ml-2">
+                            <button @click="activeTab = 'profile'" :class="{'text-blue-600 border-blue-600 dark:text-blue-400 dark:border-blue-400': activeTab === 'profile', 'text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300': activeTab !== 'profile'}" class="inline-block p-4 border-b-2 rounded-t-lg">
+                                تعديل الملف الشخصي
+                            </button>
+                        </li>
+                        <li class="ml-2">
+                            <button @click="activeTab = 'password'" :class="{'text-blue-600 border-blue-600 dark:text-blue-400 dark:border-blue-400': activeTab === 'password', 'text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300': activeTab !== 'password'}" class="inline-block p-4 border-b-2 rounded-t-lg">
+                                تغيير كلمة المرور
+                            </button>
+                        </li>
+                        <li>
+                            <button @click="activeTab = 'delete'" :class="{'text-red-600 border-red-600 dark:text-red-400 dark:border-red-400': activeTab === 'delete', 'text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300': activeTab !== 'delete'}" class="inline-block p-4 border-b-2 rounded-t-lg">
+                                حذف الحساب
+                            </button>
+                        </li>
+                    </ul>
                 </div>
                 
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-                    @forelse(auth()->user()->getFeaturedBadges(10) as $badge)
-                        <div class="text-center p-3">
-                            <div class="w-16 h-16 mx-auto bg-gradient-to-r from-yellow-400 to-amber-500 rounded-full flex items-center justify-center">
-                                <span class="text-2xl text-white">{{ $badge->badge->emoji }}</span>
-                            </div>
-                            <h4 class="mt-2 font-semibold text-gray-800 dark:text-white">{{ $badge->badge->name }}</h4>
-                            <p class="text-xs text-gray-500 dark:text-gray-400">{{ $badge->created_at->format('Y-m-d') }}</p>
-                        </div>
-                    @empty
-                        <div class="col-span-full text-center py-8">
-                            <p class="text-gray-500 dark:text-gray-400">لم تحصل على أي شارات بعد. شارك في المزيد من الحملات التطوعية لكسب الشارات!</p>
-                        </div>
-                    @endforelse
-                </div>
-            </div>
-            
-            <!-- أقسام تعديل الملف الشخصي -->
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- معلومات الملف الشخصي -->
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-                    <h3 class="text-xl font-bold text-gray-800 dark:text-white flex items-center mb-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                        معلومات الملف الشخصي
-                    </h3>
-                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg">
+                <div class="p-6">
+                    <!-- تعديل الملف الشخصي -->
+                    <div x-show="activeTab === 'profile'">
                         @include('profile.partials.update-profile-information-form')
                     </div>
-                </div>
-                
-                <!-- تغيير كلمة المرور -->
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-                    <h3 class="text-xl font-bold text-gray-800 dark:text-white flex items-center mb-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                        </svg>
-                        أمان الحساب
-                    </h3>
-                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    
+                    <!-- تغيير كلمة المرور -->
+                    <div x-show="activeTab === 'password'" x-cloak>
                         @include('profile.partials.update-password-form')
                     </div>
-                </div>
-            </div>
-            
-            <!-- حذف الحساب -->
-            <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow-lg sm:rounded-lg">
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-red-600 dark:text-red-400 flex items-center mb-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                        </svg>
-                        حذف الحساب
-                    </h3>
-                    <div class="bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-800/30">
+                    
+                    <!-- حذف الحساب -->
+                    <div x-show="activeTab === 'delete'" x-cloak>
                         @include('profile.partials.delete-user-form')
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
+    <style>
+        [x-cloak] { display: none !important; }
+        /* إضافة دعم RTL للصفحة */
+        html[dir="rtl"] .rtl\:left-auto { left: auto; }
+        html[dir="rtl"] .rtl\:right-10 { right: 2.5rem; }
+    </style>
 </x-app-layout>

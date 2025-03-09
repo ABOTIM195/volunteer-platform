@@ -30,13 +30,17 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone', // Keep only one instance of 'phone'
+        'city',
+        'bio',
         'type',
         'avatar', // إضافة حقل الصورة الشخصية
         'description', // نبذة تعريفية
         'website', // الموقع الإلكتروني
-        'phone', // رقم الهاتف
+        // 'phone', // Removed duplicate phone entry
         'twitter', // حساب تويتر
         'instagram', // حساب انستجرام
+        'profile_photo_path', // Add this for profile photo storage
     ];
 
     /**

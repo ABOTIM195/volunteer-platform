@@ -27,7 +27,7 @@ class CampaignController extends Controller
         
         return view('welcome', compact('campaigns'));
     }
-
+ 
     /**
      * Show the form for creating a new campaign.
      */
