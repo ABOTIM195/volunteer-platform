@@ -1,5 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\CampaignController as AdminCampaignController;
+use App\Http\Controllers\Admin\DonationController as AdminDonationController;
+use App\Http\Controllers\Admin\ParticipationRequestController as AdminParticipationRequestController;
+use App\Http\Controllers\Admin\StatisticsController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\BadgeController as AdminBadgeController;
+use App\Http\Controllers\Admin\CommentController as AdminCommentController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\CommentController;
@@ -37,6 +45,47 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['au
 
 // بعد التعديل
 
+
+// مسارات لوحة المدير
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    // الصفحة الرئيسية للوحة المدير
+    Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+    
+    // إدارة المستخدمين
+    Route::get('/users', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('users.index');
+    Route::get('/users/create', [App\Http\Controllers\Admin\UserController::class, 'create'])->name('users.create');
+    Route::post('/users', [App\Http\Controllers\Admin\UserController::class, 'store'])->name('users.store');
+    Route::get('/users/{user}', [App\Http\Controllers\Admin\UserController::class, 'show'])->name('users.show');
+    Route::put('/users/{user}', [App\Http\Controllers\Admin\UserController::class, 'update'])->name('users.update');
+    Route::delete('/users/{user}', [App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('users.delete');
+    
+    // إدارة الحملات
+    Route::get('/campaigns', [App\Http\Controllers\Admin\CampaignController::class, 'index'])->name('campaigns.index');
+    Route::get('/campaigns/create', [App\Http\Controllers\Admin\CampaignController::class, 'create'])->name('campaigns.create');
+    Route::post('/campaigns', [App\Http\Controllers\Admin\CampaignController::class, 'store'])->name('campaigns.store');
+    Route::get('/campaigns/{campaign}', [App\Http\Controllers\Admin\CampaignController::class, 'show'])->name('campaigns.show');
+    Route::put('/campaigns/{campaign}', [App\Http\Controllers\Admin\CampaignController::class, 'update'])->name('campaigns.update');
+    Route::delete('/campaigns/{campaign}', [App\Http\Controllers\Admin\CampaignController::class, 'destroy'])->name('campaigns.delete');
+    
+    // إدارة الشارات
+    Route::get('/badges', [App\Http\Controllers\Admin\BadgeController::class, 'index'])->name('badges.index');
+    Route::get('/badges/create', [App\Http\Controllers\Admin\BadgeController::class, 'create'])->name('badges.create');
+    Route::post('/badges', [App\Http\Controllers\Admin\BadgeController::class, 'store'])->name('badges.store');
+    Route::get('/badges/{badge}/edit', [App\Http\Controllers\Admin\BadgeController::class, 'edit'])->name('badges.edit');
+    Route::put('/badges/{badge}', [App\Http\Controllers\Admin\BadgeController::class, 'update'])->name('badges.update');
+    Route::delete('/badges/{badge}', [App\Http\Controllers\Admin\BadgeController::class, 'destroy'])->name('badges.delete');
+    
+    // إدارة التعليقات
+    Route::get('/comments', [App\Http\Controllers\Admin\CommentController::class, 'index'])->name('comments.index');
+    Route::delete('/comments/{comment}', [App\Http\Controllers\Admin\CommentController::class, 'destroy'])->name('comments.delete');
+    
+    // مسار الإحصائيات - أضف هنا مباشرة
+    Route::get('/statistics', [App\Http\Controllers\Admin\StatisticsController::class, 'index'])->name('statistics');
+    
+    // الإعدادات
+    Route::get('/settings', [App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings');
+    Route::put('/settings', [App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
+});
 
 // Public campaign routes
 Route::get('/campaigns', [CampaignController::class, 'index'])

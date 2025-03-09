@@ -122,39 +122,40 @@ class CampaignController extends Controller
      */
     public function update(Request $request, Campaign $campaign)
     {
-        // التحقق من أن المستخدم هو منشئ الحملة
-        if (auth()->id() !== $campaign->creator_id) {
-            abort(403, 'غير مصرح لك بتعديل هذه الحملة');
+        // Check if the user is the creator of the campaign
+        if (Auth::id() !== $campaign->creator_id) {
+            return redirect()->route('campaigns.show', $campaign)
+                ->with('error', 'غير مصرح لك بتعديل هذه الحملة');
         }
-    
+
+        // Validate the request
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'type' => 'required|in:volunteer,help',
+            'type' => [
+                'required',
+                Rule::in([Campaign::TYPE_VOLUNTEER, Campaign::TYPE_HELP]),
+            ],
             'target_amount' => 'nullable|numeric|min:0',
             'start_date' => 'required|date',
-            'end_date' => 'nullable|date|after_or_equal:start_date',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'skills' => 'nullable|string|max:255',
+            'end_date' => 'nullable|date|after:start_date',
+            'image' => 'nullable|image|max:2048', // Max 2MB
         ]);
-    
-        // التعامل مع الصورة
+        
+        // معالجة الصورة إذا تم تحميلها
         if ($request->hasFile('image')) {
-            // إذا كانت هناك صورة قديمة، قم بحذفها
+            // حذف الصورة القديمة إذا كانت موجودة
             if ($campaign->image) {
                 Storage::disk('public')->delete($campaign->image);
             }
+            
+            // تخزين الصورة الجديدة
             $validated['image'] = $request->file('image')->store('campaigns', 'public');
-        } elseif ($request->has('remove_image') && $request->remove_image) {
-            // إذا تم طلب إزالة الصورة
-            if ($campaign->image) {
-                Storage::disk('public')->delete($campaign->image);
-            }
-            $validated['image'] = null;
         }
-    
+        
+        // تحديث بيانات الحملة
         $campaign->update($validated);
-    
+        
         return redirect()->route('campaigns.show', $campaign)
             ->with('success', 'تم تحديث الحملة بنجاح');
     }

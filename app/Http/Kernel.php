@@ -24,6 +24,11 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\CompressResponse::class,
     ];
 
+
+    protected $routeMiddleware = [
+        // 
+        'admin' => YourMiddlewareClass::class,
+    ];
     /**
      * The application's route middleware groups.
      *
@@ -67,5 +72,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'cache.response' => \App\Http\Middleware\CacheResponse::class,
+        'admin' => \App\Http\Middleware\AdminMiddleware::class,
     ];
 }

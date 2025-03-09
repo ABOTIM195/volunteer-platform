@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -100,7 +101,10 @@ class Campaign extends Model
      */
     public function getImageUrlAttribute()
     {
-        if (!$this->image) {
+        // تسجير قيمة الصورة للتصحيح
+        \Log::debug('Campaign image value:', ['image' => $this->image, 'campaign_id' => $this->id]);
+        
+        if (!$this->image || $this->image === '') {
             return asset('images/campaign-placeholder.jpg');
         }
         
@@ -132,5 +136,10 @@ class Campaign extends Model
     public function isHelpCampaign(): bool
     {
         return $this->type === self::TYPE_HELP;
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

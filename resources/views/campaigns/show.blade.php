@@ -23,7 +23,19 @@
                             </div>
                             
                             @if($campaign->image)
-                                <img src="{{ asset('storage/' . $campaign->image) }}" alt="{{ $campaign->title }}" class="w-full h-auto rounded-lg mb-6">
+                                <!-- معلومات تصحيح - قم بإزالتها بعد حل المشكلة -->
+                                @if(config('app.debug'))
+                                <div class="bg-yellow-100 p-2 mb-2 rounded text-sm">
+                                    <p>قيمة الصورة: {{ $campaign->image }}</p>
+                                    <p>مسار الصورة: {{ $campaign->image_url }}</p>
+                                </div>
+                                @endif
+                                
+                                <!-- استخدام طرق مختلفة لعرض الصورة -->
+                                <div class="mb-6">
+                                    <!-- الطريقة 1: استخدام URL مباشر -->
+                                    <img src="{{ url('storage/' . $campaign->image) }}" alt="{{ $campaign->title }}" class="w-full h-auto rounded-lg mb-2">
+                                </div>
                             @endif
                             
                             <div class="prose dark:prose-invert max-w-none mb-6">
